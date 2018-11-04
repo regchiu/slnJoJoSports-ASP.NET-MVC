@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="444a872d8ecd4c1c961b353768449ed9" Name="Diagram1">
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t訂閱名單" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t留言板回覆" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t參加名單" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t開團" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t開團留言板" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t開團評價" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t會員狀態" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t會員資料" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t運動項目" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="dbJoJoSportsModel.t縣市名稱" Width="1.5" PointX="6.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

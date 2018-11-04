@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>JoJoSports</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/fontawesome-free-5.3.1-web/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/fontawesome-free-5.3.1-web/css/solid.css" rel="stylesheet" />
+    <link href="~/fontawesome-free-5.3.1-web/css/brands.css" rel="stylesheet" />
+    <script src="~/fontawesome-free-5.3.1-web/js/solid.js"></script>
+    <script src="~/fontawesome-free-5.3.1-web/js/brands.js"></script>
+    <script src="~/fontawesome-free-5.3.1-web/js/fontawesome.js"></script>
+    <!-- Custom styles for this template-->
+    <link href="~/Content/sb-admin.css" rel="stylesheet" />
+    <!--Tempus Dominus Bootstrap 4-->
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/tempusdominus-bootstrap-4.js"></script>
+    <link href="~/Content/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+    <script src="~/Scripts/locales/zh-tw.js"></script>
+    <!--Rate Yo!-->
+    <link href="~/Content/jquery.rateyo.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.rateyo.js"></script>
+    <style>
+        .btn_Logout {
+            padding: 5px 16px;
+            border: 1px solid #FFFFFF;
+            background-color: #FAAB1A;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 4px;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-family: '微軟正黑體';
+            font-weight: bold;
+            text-decoration: none;
+            -webkit-transition: 0.1s;
+            -moz-transition: 0.1s;
+            -o-transition: 0.1s;
+            cursor: pointer;
+        }
+
+            .btn_Logout:hover {
+                background: none;
+                background-color: #FAAB1A;
+                box-shadow: 0px 0px 5px 0px #AAAAAA;
+                -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+                -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+                border: 1px solid #ffffff;
+                color: #17262a;
+            }
+
+            .btn_Logout:active {
+                top: 1px;
+                position: relative;
+            }
+
+        .btn_LogoutCancel {
+            padding: 5px 16px;
+            border: 1px solid #FFFFFF;
+            background-color: #8ba7b8;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 4px;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-family: '微軟正黑體';
+            font-weight: bold;
+            text-decoration: none;
+            -webkit-transition: 0.1s;
+            -moz-transition: 0.1s;
+            -o-transition: 0.1s;
+            cursor: pointer;
+        }
+
+            .btn_LogoutCancel:hover {
+                background: none;
+                background-color: #8ba7b8;
+                box-shadow: 0px 0px 5px 0px #AAAAAA;
+                -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+                -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+                border: 1px solid #ffffff;
+                color: #17262a;
+            }
+
+            .btn_LogoutCancel:active {
+                top: 1px;
+                position: relative;
+            }
+    </style>
+</head>
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark static-top" style="background-color:#344955">
+        <a class="navbar-brand" href="/Home/Index">
+            <img src="~/Logo/home_Icon.PNG" class="img-fluid" alt="Responsive image" />
+        </a>
+        @*@Html.ActionLink("JoJoSports", "Index", "Home", new { area = "" }, new { @class = "navbar-brand js-scroll-trigger", style = "color:#FAAB1A;font-size:xx-large;font-family:'Bauhaus 93'" })*@
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <!--提醒-->
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bell fa-lg"></i>
+                        <span class="count badge badge-danger"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                        <ul id="notiContent" class="dropdown-item" href="#"></ul>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user fa-lg"></i>
+                        <span style="font-family:'微軟正黑體';font-weight:bold;">@Session["Name"]</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="/Home/Profile_Index" style="font-family:'微軟正黑體';font-weight:bold;">個人頁面</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" style="font-family:'微軟正黑體';font-weight:bold;">登出</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav" style="background-color:#3C5462">
+            <li class="nav-item active">
+                <a class="nav-link" href="/Home/Profile_Index">
+                    <span>
+                        <img class="rounded-circle img-thumbnail mx-auto" src="~/Profile_picture/@Session["Photo"]" alt="大頭貼" style="width:60px;height:60px">
+                    </span>
+                    <span style="font-family:'微軟正黑體';font-weight:bold;">@Session["Name"]</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-cog fa-lg"></i>
+                    <span style="font-family:'微軟正黑體';font-weight:bold;">帳戶管理</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" href="/Home/Profile_Edit" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">修改個人資料</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("MyTeam")" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">我的開團管理</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("MyJoinTeam")" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">我的參團管理</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Home/History" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">歷史開團/參團紀錄</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Home/SubscribersList" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">訂閱追蹤名單</a>
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-book fa-lg"></i>
+                    <span style="font-family:'微軟正黑體';font-weight:bold;">功能選單</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" href="/Home/SearchMember" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">找會員</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Home/NewTeamList" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">找新團</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Home/OldTeamList" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">找舊團</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Home/CreateNewTeam" style="color:#344955;font-weight:bold;font-family:'微軟正黑體'">開團</a>
+
+                </div>
+            </li>
+        </ul>
+        <div id="content-wrapper">
+            @RenderBody()
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Sticky-Footer -->
+        <footer class="sticky-footer" style="background-color:#344955">
+            <div class="container my-auto">
+                <div class="row">
+                    <div class="col-sm">
+                        <a>
+                            <img src="~/Logo/home_FooterIcon.png" class="img-fluid" alt="Responsive image" />
+                        </a>
+                        <p class="m-0 text-white">Connect. Be Seen. Be Discovered</p>
+                    </div>
+                    <div class="col-sm">
+                        @*第二欄*@
+                    </div>
+                    <div class="col-sm">
+                        <p class="m-0 text-right text-white"><br /></p>
+                        <p class="m-0 text-right text-white">JoJoSports&copy;2018</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container -->
+        </footer>
+    </div>
+    <!-- /#wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'微軟正黑體';font-weight:bold;">確定要登出?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family:'微軟正黑體'">若您確定要登出，請選擇下方的"登出"</div>
+                <div class="modal-footer">
+                    <button class="btn btn_LogoutCancel" type="button" data-dismiss="modal">取消</button>
+                    <a class="btn btn_Logout" href="/Home/Logout">登出</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Scripts/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Scripts/sb-admin.min.js"></script>
+
+    <!--signalR2-->
+    <script src="~/Scripts/jquery.signalR-2.3.0.js"></script>
+    <script src="/signalr/hubs"></script>
+
+    @* Add jquery code for Get Notification & setup signalr *@
+    <script type="text/javascript">
+        $(function () {
+            // Click on notification icon for show notification
+            $('#alertsDropdown').click(function (e) {
+                e.stopPropagation();
+                $('#alertsDropdown').dropdown();
+                updateNotification();
+                var count = 0;
+                count = parseInt($('span.count').html()) || 0;
+                //only load notification if not already loaded
+                if (count > 0) {
+                    updateNotification();
+                }
+                $('span.count', this).html('');
+            });
+
+            // update notification
+            function updateNotification() {
+                $('#notiContent').empty();
+                $('#notiContent').append($('<li>Loading...</li>'));
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/home/GetNotificationContacts',
+                    success: function (response) {
+                        $('#notiContent').empty();
+                        if (response.length == 0) {
+                            $('#notiContent').append($('<li style="font-family:"微軟正黑體"">沒有新訊息</li>'));
+                        }
+                        $.each(response, function (index, value) {
+                            $('#notiContent').append($('<li style="font-family:"微軟正黑體"">'+'新訊息 : ' + '<span style="font-weight:bold">' + value.f團長名稱 + '</span>' + ' 創立了新團 ' + '<a href="@Url.Action("NewTeamDetail")?f開團編號=' + value.f開團編號 + '"' + ' style="font-weight:bold;">' + value.f標題 + '</a></li>'));
+                        });
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+            // update notification count
+            function updateNotificationCount() {
+                var count = 0;
+                count = parseInt($('span.count').html()) || 0;
+                count++;
+                $('span.count').html('New');
+                //$('span.count').html(count);
+            }
+            // signalr js code for start hub and send receive notification
+            var notificationHub = $.connection.notificationHub;
+            $.connection.hub.start().done(function () {
+                console.log('Notification hub started');
+            });
+
+            //signalr method for push server message to client
+            notificationHub.client.notify = function (message) {
+                if (message && message.toLowerCase() == "added") {
+                    updateNotificationCount();
+                }
+            };
+
+        });
+    </script>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#sidebarToggle").click();
+    });
+</script>

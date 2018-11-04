@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbJoJoSportsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dbJoJoSportsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="t訂閱名單" EntityType="dbJoJoSportsModel.t訂閱名單" />
+    <EntitySet Name="t留言板回覆" EntityType="dbJoJoSportsModel.t留言板回覆" />
+    <EntitySet Name="t參加名單" EntityType="dbJoJoSportsModel.t參加名單" />
+    <EntitySet Name="t開團" EntityType="dbJoJoSportsModel.t開團" />
+    <EntitySet Name="t開團留言板" EntityType="dbJoJoSportsModel.t開團留言板" />
+    <EntitySet Name="t開團評價" EntityType="dbJoJoSportsModel.t開團評價" />
+    <EntitySet Name="t會員狀態" EntityType="dbJoJoSportsModel.t會員狀態" />
+    <EntitySet Name="t會員資料" EntityType="dbJoJoSportsModel.t會員資料" />
+    <EntitySet Name="t運動項目" EntityType="dbJoJoSportsModel.t運動項目" />
+    <EntitySet Name="t縣市名稱" EntityType="dbJoJoSportsModel.t縣市名稱" />
+  </EntityContainer>
+  <EntityType Name="t訂閱名單">
+    <Key>
+      <PropertyRef Name="f訂閱名單編號" />
+    </Key>
+    <Property Name="f訂閱名單編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f會員名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f訂閱會員名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t留言板回覆">
+    <Key>
+      <PropertyRef Name="f留言板回覆編號" />
+    </Key>
+    <Property Name="f留言板回覆編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f開團留言板編號" Type="Int32" />
+    <Property Name="f會員名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f回覆內容" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f發布時間" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="t參加名單">
+    <Key>
+      <PropertyRef Name="f參加名單編號" />
+    </Key>
+    <Property Name="f參加名單編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f開團編號" Type="Int32" />
+    <Property Name="f會員名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f狀態" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="f是否出席" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t開團">
+    <Key>
+      <PropertyRef Name="f開團編號" />
+    </Key>
+    <Property Name="f開團編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f團長名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f運動項目名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f標題" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f備註" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f活動開始時間" Type="DateTime" Precision="3" />
+    <Property Name="f活動結束時間" Type="DateTime" Precision="3" />
+    <Property Name="f貼文發布時間" Type="DateTime" Precision="3" />
+    <Property Name="f報名截止時間" Type="DateTime" Precision="3" />
+    <Property Name="f人數上限" Type="Int32" />
+    <Property Name="f活動地點" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="f緯度" Type="Decimal" Precision="10" Scale="8" />
+    <Property Name="f經度" Type="Decimal" Precision="11" Scale="8" />
+    <Property Name="f狀態" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t開團留言板">
+    <Key>
+      <PropertyRef Name="f開團留言板編號" />
+    </Key>
+    <Property Name="f開團留言板編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f開團編號" Type="Int32" />
+    <Property Name="f會員名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f留言內容" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f發布時間" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="t開團評價">
+    <Key>
+      <PropertyRef Name="f開團評價編號" />
+    </Key>
+    <Property Name="f開團評價編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f開團編號" Type="Int32" />
+    <Property Name="f會員名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f評論" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f評分" Type="Int32" />
+    <Property Name="f活動照片1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f活動照片2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f活動照片3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f活動照片4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f活動照片5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f發布時間" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="t會員狀態">
+    <Key>
+      <PropertyRef Name="f會員狀態編號" />
+    </Key>
+    <Property Name="f會員狀態編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f帳號" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f大頭貼" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="f個人簡介" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t會員資料">
+    <Key>
+      <PropertyRef Name="f會員資料編號" />
+    </Key>
+    <Property Name="f會員資料編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f帳號" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f密碼" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f姓名" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f性別" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="f電話" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f生日" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="t運動項目">
+    <Key>
+      <PropertyRef Name="f運動項目編號" />
+    </Key>
+    <Property Name="f運動項目編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f運動名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="t縣市名稱">
+    <Key>
+      <PropertyRef Name="f縣市名稱編號" />
+    </Key>
+    <Property Name="f縣市名稱編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f縣市名稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

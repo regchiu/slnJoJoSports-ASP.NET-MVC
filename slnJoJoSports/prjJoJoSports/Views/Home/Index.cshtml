@@ -1,0 +1,269 @@
+﻿@model prjJoJoSports.Models.ViewModel
+
+<style type="text/css">
+    /*標題過長使用...*/
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .chi {
+        font-family: '微軟正黑體';
+    }
+
+    .slidebg {
+        background: rgba(255,255,255,0);
+        background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(31,31,31,0.8) 35%, rgba(31,31,31,0.9) 50%, rgba(31,31,31,0.89) 51%, rgba(31,31,31,0.8) 64%, rgba(31,31,31,0.78) 65%, rgba(255,255,255,0) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(35%, rgba(31,31,31,0.8)), color-stop(50%, rgba(31,31,31,0.9)), color-stop(51%, rgba(31,31,31,0.89)), color-stop(64%, rgba(31,31,31,0.8)), color-stop(65%, rgba(31,31,31,0.78)), color-stop(100%, rgba(255,255,255,0)));
+        background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(31,31,31,0.8) 35%, rgba(31,31,31,0.9) 50%, rgba(31,31,31,0.89) 51%, rgba(31,31,31,0.8) 64%, rgba(31,31,31,0.78) 65%, rgba(255,255,255,0) 100%);
+        background: -o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(31,31,31,0.8) 35%, rgba(31,31,31,0.9) 50%, rgba(31,31,31,0.89) 51%, rgba(31,31,31,0.8) 64%, rgba(31,31,31,0.78) 65%, rgba(255,255,255,0) 100%);
+        background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(31,31,31,0.8) 35%, rgba(31,31,31,0.9) 50%, rgba(31,31,31,0.89) 51%, rgba(31,31,31,0.8) 64%, rgba(31,31,31,0.78) 65%, rgba(255,255,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1 );
+    }
+</style>
+
+<header>
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="~/Index_carousel_pics/order1.jpg" alt="First slide">
+                    <div class="carousel-caption d-block slidebg">
+                        <h6 class="chi">想揮灑汗水的春夏秋冬</h6>
+                        <p class="chi">想運動卻找不到同伴</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/Index_carousel_pics/order2.jpg" alt="Second slide">
+                    <div class="carousel-caption d-block slidebg">
+                        <h6 class="chi">打開JoJoSports</h6>
+                        <p class="chi">發現驚奇</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/Index_carousel_pics/order3.jpg" alt="Second slide">
+                    <div class="carousel-caption d-md-block slidebg">
+                        <h6 class="chi">尋找最新的社團</h6>
+                        <p class="chi">找到離您最近的運動團體</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/Index_carousel_pics/order4.jpg" alt="Second slide">
+                    <div class="carousel-caption d-md-block slidebg">
+                        <h6 class="chi">想知道大家的經歷嗎?</h6>
+                        <p class="chi">您可以搜尋過往的社團</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="~/Index_carousel_pics/order5.jpg" alt="Third slide">
+                    <div class="carousel-caption d-md-block slidebg">
+                        <h6 class="chi">呼朋引伴留下美好回憶</h6>
+                        <p class="chi">從此運動不孤單!!</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</header>
+<br />
+<section>
+    <div class="container" style="margin-top:50px;margin-bottom:50px">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h4 class="text-center" style="font-family:'微軟正黑體';color:#3a3838;font-weight:bold">這裡......</h4>
+                <h2 class="text-center" style="font-family:'微軟正黑體';color:#3a3838;font-weight:bold">最新的團等你加入</h2>
+                @if (Session["Member"] == null)
+                {
+                    <p class="text-center"><a href="@Url.Action("Login")" class="btn btn-link" style="font-family:'微軟正黑體';font-weight:bold">探索更多 &raquo;</a></p>
+                }
+                @if (Session["Member"] != null)
+                {
+                    <p class="text-center"><a href="@Url.Action("NewTeamList")" class="btn btn-link" style="font-family:'微軟正黑體';font-weight:bold">探索更多 &raquo;</a></p>
+                }
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.開團.Count() == 0)
+            {
+
+            }
+            @foreach (var item in Model.開團)
+            {
+                <div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Sports_picture_700x400/@item.f運動項目名稱/default.jpg">
+                        <div class="card-body">
+                            <h4 class="card-title" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a;">@item.f標題</h4>
+                            <h6 class="card-text" style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.f運動項目名稱</h6>
+                            <br />
+                            <p class="card-text" style="font-family:'微軟正黑體';margin:auto">活動開始時間</p>
+                            <p class="card-text" style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.f活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動開始時間.ToString()).ToShortTimeString()</p>
+                            <p class="card-text" style="font-family:'微軟正黑體';margin:auto">報名截止時間</p>
+                            <p class="card-text" style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.f報名截止時間.ToString()).ToShortDateString() @DateTime.Parse(item.f報名截止時間.ToString()).ToShortTimeString()</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                @if (Session["Member"] != null)
+                                {
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("NewTeamDetail")?f開團編號=@item.f開團編號" class="btn btn-sm btn-outline-secondary">查看</a>
+                                    </div>
+                                }
+
+                                @{
+                                    DateTime dt = DateTime.Now;
+                                    DateTime postdt = (DateTime)item.f貼文發布時間;
+                                    TimeSpan ts = dt.Subtract(postdt);
+                                    double dayCount = ts.Days;
+                                    double hoursCount = ts.Hours;
+                                    double minutesCount = ts.Minutes;
+                                    if (dayCount >= 1)
+                                    {
+                                        <small class="text-muted">@dayCount 天前發布</small>
+                                    }
+                                    if (dayCount < 1 && hoursCount >= 1)
+                                    {
+                                        <small class="text-muted">@hoursCount 小時前發布</small>
+                                    }
+                                    else if (dayCount < 1 && hoursCount < 1)
+                                    {
+                                        <small class="text-muted">@minutesCount 分鐘前發布</small>
+                                    }
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+
+    </div>
+</section>
+<section>
+    <div class="container" style="margin-bottom:100px">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h4 class="text-center" style="font-family:'微軟正黑體';color:#3a3838;font-weight:bold">找找......</h4>
+                <h2 class="text-center" style="font-family:'微軟正黑體';color:#3a3838;font-weight:bold">曾經有哪些有趣的團</h2>
+                @if (Session["Member"] == null)
+                {
+                    <p class="text-center"><a href="@Url.Action("Login")" class="btn btn-link" style="font-family:'微軟正黑體';font-weight:bold">探索更多 &raquo;</a></p>
+                }
+                @if (Session["Member"] != null)
+                {
+                    <p class="text-center"><a href="@Url.Action("OldTeamList")" class="btn btn-link" style="font-family:'微軟正黑體';font-weight:bold">探索更多 &raquo;</a></p>
+                }
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.舊團.Count() == 0)
+            {
+
+            }
+            @foreach (var item in Model.舊團)
+            {
+                <div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Sports_picture_700x400/@item.運動項目名稱/default.jpg">
+                        <div class="card-body">
+                            <div class="row">
+                                @if (item.平均評分 == null)
+                                {
+                                    <div class="text-center" id="rateYo_@item.開團編號"></div>
+                                    <h5 class="card-title" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">尚無評分</h5>
+                                    <script>
+                                    $(function () {
+                                        $("#rateYo_@item.開團編號").rateYo({
+                                            rating: 0,
+                                            readOnly: true,
+                                            starWidth:"22px"
+                                        });
+                                    });
+                                    // Getter
+                                    var readOnly = $("#rateYo_@item.開團編號").rateYo("option", "readOnly"); //returns true
+                                    // Setter
+                                    $("#rateYo_@item.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                                    </script>
+                                }
+                                else
+                                {
+                                    <div class="text-center" id="rateYo_@item.開團編號"></div>
+                                    <h5 class="card-title" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@(((double)item.平均評分).ToString("F1"))</h5>
+                                    <br />
+                                    <script>
+                                    $(function () {
+                                        $("#rateYo_@item.開團編號").rateYo({
+                                            rating: @item.平均評分,
+                                            readOnly: true,
+                                            starWidth:"22px"
+                                        });
+                                    });
+                                    // Getter
+                                    var readOnly = $("#rateYo_@item.開團編號").rateYo("option", "readOnly"); //returns true
+                                    // Setter
+                                    $("#rateYo_@item.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                                    </script>
+                                }
+
+                            </div>
+                            <h4 class="card-title" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.標題</h4>
+                            <h6 class="card-text" style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.運動項目名稱</h6>
+                            <br />
+                            <p class="card-text" style="font-family:'微軟正黑體';margin:auto">活動結束時間</p>
+                            <p class="card-text" style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.活動結束時間.ToString()).ToShortTimeString()</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                @if (Session["Member"] != null)
+                                {
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("OldTeamDetail")?f開團編號=@item.開團編號" class="btn btn-sm btn-outline-secondary">查看</a>
+                                    </div>
+                                }
+
+                                @{
+                                    DateTime dt = DateTime.Now;
+                                    DateTime postdt = (DateTime)item.活動結束時間;
+                                    TimeSpan ts = dt.Subtract(postdt);
+                                    double dayCount = ts.Days;
+                                    double hoursCount = ts.Hours;
+                                    double minutesCount = ts.Minutes;
+                                    if (dayCount >= 1)
+                                    {
+                                        <small class="text-muted">@dayCount 天前結束</small>
+                                    }
+                                    if (dayCount < 1 && hoursCount >= 1)
+                                    {
+                                        <small class="text-muted">@hoursCount 小時前結束</small>
+                                    }
+                                    else if (dayCount < 1 && hoursCount < 1)
+                                    {
+                                        <small class="text-muted">@minutesCount 分鐘前結束</small>
+                                    }
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+    </div>
+</section>

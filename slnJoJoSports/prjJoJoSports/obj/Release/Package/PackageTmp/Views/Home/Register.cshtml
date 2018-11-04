@@ -1,0 +1,123 @@
+﻿@model prjJoJoSports.Models.t會員資料
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>JoJoSports - Register</title>
+    <!-- Bootstrap core CSS-->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/fontawesome-free-5.3.1-web/css/all.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template-->
+    <link href="~/Content/sb-admin.css" rel="stylesheet" />
+</head>
+<body class="bg-dark">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="card card-register mx-auto mt-5">
+                <div class="card-header text-center" style="background-color:#344955">
+                    <img src="~/Logo/home_Icon.PNG" class="img-fluid" alt="Responsive image" />
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EditorFor(model => model.f帳號, new { htmlAttributes = new { @class = "form-control", placeholder = "電子郵件", id = "f帳號", autofocus = "autofocus" } })
+                                @Html.ValidationMessageFor(model => model.f帳號, "", new { @class = "text-danger" })
+                                <label for="f帳號">電子郵件</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(model => model.f密碼, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "密碼", id = "f密碼" } })
+                                        @Html.ValidationMessageFor(model => model.f密碼, "", new { @class = "text-danger" })
+                                        <label for="f密碼">密碼</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(model => model.f確認密碼, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "確認密碼", id = "f確認密碼" } })
+                                        @Html.ValidationMessageFor(model => model.f確認密碼, "", new { @class = "text-danger" })
+                                        <label for="f確認密碼">確認密碼</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EditorFor(model => model.f姓名, new { htmlAttributes = new { @class = "form-control", placeholder = "姓名", id = "f姓名" } })
+                                @Html.ValidationMessageFor(model => model.f姓名, "", new { @class = "text-danger" })
+                                <label for="f姓名">姓名</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EditorFor(model => model.f名稱, new { htmlAttributes = new { @class = "form-control", placeholder = "用戶名稱", id = "f名稱" } })
+                                @Html.ValidationMessageFor(model => model.f名稱, "", new { @class = "text-danger" })
+                                <label for="f名稱">用戶名稱</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EditorFor(model => model.f生日, new { htmlAttributes = new { @class = "form-control", placeholder = "出生日期", id = "f生日" } })
+                                @Html.ValidationMessageFor(model => model.f生日, "", new { @class = "text-danger" })
+                                <label for="f生日">出生日期</label>
+                            </div>
+                        </div>
+                        <div class="form-group" data-toggle="buttons">
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <label class="btn btn-outline-secondary btn-lg btn-block">
+                                        @Html.RadioButtonFor(model => model.f性別, "男", new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })男
+                                    </label>
+
+                                </div>
+                                <div class="col-6">
+                                    <label class="btn btn-outline-secondary btn-lg btn-block">
+                                        @Html.RadioButtonFor(model => model.f性別, "女", new { htmlAttributes = new { @class = "form-control" } })女
+                                    </label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.f性別, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EditorFor(model => model.f電話, new { htmlAttributes = new { @class = "form-control", placeholder = "聯絡電話", id = "f電話" } })
+                                @Html.ValidationMessageFor(model => model.f電話, "", new { @class = "text-danger" })
+                                <label for="f電話">連絡電話</label>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="註冊會員" class="btn btn-lg btn-block" style="font-family:'微軟正黑體'; font-weight:bold; color:#ffffff;background-color:#ffae16" />
+                        <p style="color:red">@ViewBag.Message<!--此帳號已有人使用,註冊失敗--></p>
+                    </form>
+                    <div class="text-center">
+                        @Html.ActionLink("已經是會員了嗎?", "Login", "Home", new { @class = "d-block small mt-3 text-black-50", @style = "font-family:'微軟正黑體'; font-weight:bold; font-size:medium " })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Scripts/jquery.easing.min.js"></script>
+</body>
+</html>
+

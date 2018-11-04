@@ -1,0 +1,126 @@
+﻿@model prjJoJoSports.Models.t會員狀態
+<style type="text/css">
+    .btn_Edit {
+        padding: 7.5px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Edit:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Edit:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Cancel {
+        padding: 7.5px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #8ba7b8;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Cancel:hover {
+            background: none;
+            background-color: #8ba7b8;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Cancel:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+
+
+@using (Html.BeginForm("Profile_Edit", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container" style="margin-top:50px">
+        <div class="row">
+            <label class="btn btn-link" title="變更大頭貼照">
+                <img class="rounded-circle img-fluid d-block mx-auto" id="preview_img" src="~/Profile_picture/@Model.f大頭貼" style="width:200px;height:200px" />
+                <input type="file" onchange="readURL(this)" name="photo" id="photo" targetID="preview_img" accept="image/gif, image/jpeg, image/png" style="display:none" />
+            </label>
+            <div class="card-body">
+                <h2 class="card-title" style="font-family:'微軟正黑體';font-weight:bold">@Model.f名稱</h2>
+                <h4 class="card-text" style="font-family:'微軟正黑體'" title="個人簡介"> <textarea class="form-control" id="f個人簡介" name="f個人簡介" rows="5" style="resize:none">@Model.f個人簡介</textarea></h4>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div style="width:100%">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="font-family:'微軟正黑體'">生日<br /><a style="font-weight:bold">@Session["Birthday"]</a></li>
+                    <li class="list-group-item" style="font-family:'微軟正黑體'">性別<br /><a style="font-weight:bold">@Session["Gender"]</a></li>
+                    <li class="list-group-item" style="font-family:'微軟正黑體'">信箱<br /><a style="font-weight:bold">@Session["Email"]</a></li>
+                    <li class="list-group-item" style="font-family:'微軟正黑體'">電話<br /><a style="font-weight:bold">@Session["Phone"]</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+
+        <div class="row; float-lg-right" style="margin-top:50px">
+            <div class="form-group">
+                <input type="submit" value="修 改" class="btn btn_Edit" style="margin-right:20px" />
+                <a href="/Home/Profile_Index"  class="btn btn_Cancel">取 消</a>
+            </div>
+        </div>
+
+    </div>
+}
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+
+            var imageTagID = input.getAttribute("targetID");
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                var img = document.getElementById(imageTagID);
+
+                img.setAttribute("src", e.target.result)
+
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+

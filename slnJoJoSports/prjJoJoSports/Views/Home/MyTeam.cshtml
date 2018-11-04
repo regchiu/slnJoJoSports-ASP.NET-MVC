@@ -1,0 +1,539 @@
+﻿@model prjJoJoSports.Models.ViewModel
+<style type="text/css">
+
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+    /*標題過長使用...*/
+    .teamtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn_Detail {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-family: '微軟正黑體';
+        font-size: 16px;
+        font-weight: bold;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Detail:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Detail:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Check {
+        padding: 6px 35px;
+        border: 1px solid #FFFFFF;
+        background-color: #76a8cd;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        font-family: '微軟正黑體';
+        font-size: 16px;
+        font-weight: bold;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Check:hover {
+            background: none;
+            background-color: #76a8cd;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+        }
+
+        .btn_Check:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Attendant {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #2c3d47;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-family: '微軟正黑體';
+        font-size: 16px;
+        font-weight: bold;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Attendant:hover {
+            background: none;
+            background-color: #2c3d47;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Attendant:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Send {
+        padding: 5px 16px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Send:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Send:active {
+            top: 1px;
+            position: relative;
+        }
+
+
+    .btn_Cancel {
+        padding: 5px 16px;
+        border: 1px solid #FFFFFF;
+        background-color: #8ba7b8;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Cancel:hover {
+            background: none;
+            background-color: #8ba7b8;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Cancel:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+<!--活動進行中-->
+<div class="container-fluid" style="margin-top:50px;margin-bottom:50px;">
+    @if (Model.進行中的團.Count() != 0)
+    {
+        <h2 style="font-family:'微軟正黑體';font-weight:bold">目前您創建的團-活動進行中</h2>
+        <hr />
+    }
+    @foreach (var item in Model.進行中的團)
+    {
+        <div class="container" style="margin-top:30px;">
+            <!-- Project One -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_350x350/@item.運動項目名稱/default.jpg" alt="NewTeam Image">
+                    </div>
+                </div>
+                <div class="col-md-5" style="margin-bottom:10px">
+                    <h3 class="teamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.標題</h3>
+                    @if (Session["Name"].ToString() == item.團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("Profile_Index")">@item.團長名稱</a></p>
+                    }
+                    @if (Session["Name"].ToString() != item.團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("MemberPage")?f會員名稱=@item.團長名稱">@item.團長名稱</a></p>
+                    }
+
+                    <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.運動項目名稱</h5>
+                    <p style="font-family:'微軟正黑體';margin:auto">活動時間</p>
+                    <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item.活動開始時間.ToString()).ToShortTimeString() 至 @DateTime.Parse(item.活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.活動結束時間.ToString()).ToShortTimeString()</p>
+                    <div class="row align-items-end">
+                        <div class="col-md-7">
+                            <p style="font-family:'微軟正黑體';margin:auto">報名截止時間</p>
+                            <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.報名截止時間.ToString()).ToShortDateString() @DateTime.Parse(item.報名截止時間.ToString()).ToShortTimeString()</p>
+                        </div>
+                        <div class="col-md-5 align-content-end">
+                            <a href="#" class="btn btn_Attendant float-right" data-toggle="modal" data-target="#exampleModalLong">查看出席名單</a>
+                            <a href="@Url.Action("NewTeamDetail")?f開團編號=@item.開團編號" class="btn btn_Detail float-right">查看詳細內容</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @{
+
+                        var str = "https://www.google.com.tw/maps/place/";
+                        var place = item.活動地點 + "/@";
+                        var lat = item.緯度;
+                        var lng = "," + item.經度;
+                        var zoom = "," + "16z";
+                        var googlemap = str + place + lat + lng + zoom;
+                    }
+                    <div class="form-group">
+                        <a href="@googlemap" target="_blank" data-toggle="tooltip" data-placement="top" title="點擊規劃路線">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="https://maps.googleapis.com/maps/api/staticmap?center=@item.緯度,@item.經度&zoom=16&size=400x250&maptype=roadmap&markers=color:red%7Clabel:%7C@(item.緯度),@item.經度&key=yourkey" />
+                        </a>
+
+                        @if (item.是否打卡 == 0)
+                        {
+                            <a class="btn btn_Check float-right btn-block" data-target="#exampleModalCenter" data-whatever="@item.開團編號" data-toggle="modal" style="color:#ffffff">
+                                我要打卡
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn_Check float-right btn-block disabled" style="color:#17262a">
+                                已打卡
+                            </a>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.row -->
+            <hr>
+        </div>
+    }
+</div>
+<!--活動進行中End-->
+<!--報名尚未截止-->
+<div class="container-fluid" style="margin-top:50px;margin-bottom:50px;">
+
+    @if (Model.開團.Count() == 0 && Model.進行中的團.Count() == 0)
+    {
+        <h2 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">您目前沒有創建任何團</h2>
+        <hr />
+        <h4 class="text-center" style="font-family:'微軟正黑體';font-weight:bold"><a href="@Url.Action("CreateNewTeam")">去開團吧</a></h4>
+    }
+    @if (Model.開團.Count() != 0)
+    {
+        <h2 style="font-family:'微軟正黑體';font-weight:bold">目前您創建的團-活動未開始</h2>
+        <hr />
+    }
+    @foreach (var item in Model.開團)
+    {
+        <div class="container" style="margin-top:30px;">
+            <!-- Project One -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_350x350/@item.f運動項目名稱/default.jpg" alt="NewTeam Image">
+                    </div>
+                </div>
+                <div class="col-md-5" style="margin-bottom:10px">
+                    <h3 class="teamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.f標題</h3>
+                    @if (Session["Name"].ToString() == item.f團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("Profile_Index")">@item.f團長名稱</a></p>
+                    }
+                    @if (Session["Name"].ToString() != item.f團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("MemberPage")?f會員名稱=@item.f團長名稱">@item.f團長名稱</a></p>
+                    }
+
+                    <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.f運動項目名稱</h5>
+                    <p style="font-family:'微軟正黑體';margin:auto">活動時間</p>
+                    <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.f活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動開始時間.ToString()).ToShortTimeString() 至 @DateTime.Parse(item.f活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動結束時間.ToString()).ToShortTimeString()</p>
+                    <div class="row align-items-end">
+                        <div class="col-md-7">
+                            <p style="font-family:'微軟正黑體';margin:auto">報名截止時間</p>
+                            <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.f報名截止時間.ToString()).ToShortDateString() @DateTime.Parse(item.f報名截止時間.ToString()).ToShortTimeString()</p>
+                        </div>
+                        <div class="col-md-5">
+                            <a href="@Url.Action("NewTeamDetail")?f開團編號=@item.f開團編號" class="btn btn_Detail float-right" style="margin-top:10px">查看詳細內容</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @{
+
+                        var str = "https://www.google.com.tw/maps/place/";
+                        var place = item.f活動地點 + "/@";
+                        var lat = item.f緯度;
+                        var lng = "," + item.f經度;
+                        var zoom = "," + "16z";
+                        var googlemap = str + place + lat + lng + zoom;
+                    }
+                    <div class="form-group">
+                        <a href="@googlemap" target="_blank" data-toggle="tooltip" data-placement="top" title="點擊規劃路線">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="https://maps.googleapis.com/maps/api/staticmap?center=@item.f緯度,@item.f經度&zoom=16&size=400x280&maptype=roadmap&markers=color:red%7Clabel:%7C@(item.f緯度),@item.f經度&key=yourkey" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <hr>
+        </div>
+    }
+</div>
+
+<!-- CheckGoogleMapModal -->
+@using (Html.BeginForm("MyTeamCheckIn", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:'微軟正黑體';font-weight:bold"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="output" style="font-family:'微軟正黑體'"></div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="f開團編號" name="f開團編號">
+                    </div>
+                    <!--地圖-->
+                    <!--GoogleMap-->
+                    <div id="map"></div>
+                    <script>
+                    function initMap() {
+                            var markersArray = [];
+                            var geocoder = new google.maps.Geocoder;
+                            var service = new google.maps.DistanceMatrixService;
+
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: -34.397, lng: 150.644 },
+                            zoom: 13
+                        });
+                        var locations = [
+                   @foreach (var item in Model.進行中的團)
+                   {
+                       var str = "https://www.google.com.tw/maps/place/";
+                       var place = item.活動地點 + "/@";
+                       var lat = item.緯度;
+                       var lng = "," + item.經度;
+                       var zoom = "," + "16z";
+                       var googlemap = str + place + lat + lng + zoom;
+
+                       @:['<h4>@item.標題</h4><br />@item.活動地點<br /><a href="@googlemap" target="_blank">在 Google 地圖上查看</a>',@item.緯度,@item.經度],
+                   }
+                ];
+                        //var destinationIcon = 'http://localhost:50259/GoogleMapIcon/destination.png'; //本機測試
+                        var destinationIcon = 'https://prjjojosports.azurewebsites.net/GoogleMapIcon/destination.png'; //上傳Azure
+                        // Try HTML5 geolocation.
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function (position) {
+                                var pos = {
+                                    lat: position.coords.latitude,
+                                    lng: position.coords.longitude
+                                };
+                                map.setCenter(pos);
+                                service.getDistanceMatrix({
+                                    origins: [pos],
+                                    destinations: [new google.maps.LatLng(locations[0][1], locations[0][2])],
+                                    travelMode: 'DRIVING',
+                                    unitSystem: google.maps.UnitSystem.METRIC,
+                                    avoidHighways: false,
+                                    avoidTolls: false
+                                }, function (response, status) {
+                                    if (status !== 'OK') {
+                                        alert('Error was: ' + status);
+                                    } else {
+                                        var originList = response.originAddresses;
+                                        var destinationList = response.destinationAddresses;
+                                        var outputDiv = document.getElementById('output');
+                                        outputDiv.innerHTML = '';
+                                        deleteMarkers(markersArray);
+
+                                        var showGeocodedAddressOnMap = function (asDestination) {
+                                            var icon = asDestination ? destinationIcon : null;
+                                            return function (results, status) {
+                                                if (status === 'OK') {
+                                                    markersArray.push(new google.maps.Marker({
+                                                        map: map,
+                                                        position: results[0].geometry.location,
+                                                        icon: icon
+                                                    }));
+                                                } else {
+                                                    alert('Geocode was not successful due to: ' + status);
+                                                }
+                                            };
+                                        };
+
+                                        for (var i = 0; i < originList.length; i++) {
+                                            var results = response.rows[i].elements;
+                                            geocoder.geocode({ 'address': originList[i] },
+                                                showGeocodedAddressOnMap(false));
+                                            for (var j = 0; j < results.length; j++) {
+                                                geocoder.geocode({ 'address': destinationList[j] },
+                                                    showGeocodedAddressOnMap(true));
+                                                outputDiv.innerHTML += '從 ' + originList[i] + '<br>到 ' + destinationList[j] +
+                                                    '<br>距離還有 ' + results[j].distance.text + '<br>開車需要 ' +
+                                                    results[j].duration.text + '<br>';
+
+                                                //距離在1000公尺以內才能打卡
+                                                if (results[j].distance.value <= 1000) {
+                                                    document.getElementById('submit').disabled = false;
+                                                } else {
+                                                    document.getElementById('submit').disabled = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }, function () {
+                                handleLocationError(true, infoWindow, map.getCenter());
+                            });
+                        } else {
+                            // Browser doesn't support Geolocation
+                            handleLocationError(false, infoWindow, map.getCenter());
+                        }
+                    }
+
+                    //Geolocation(定位)
+                    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent(browserHasGeolocation ?
+                            'Error: 地理位置服務失敗' :
+                            'Error: 您的瀏覽器不支持地理定位');
+                        infoWindow.open(map);
+                    }
+
+                    function deleteMarkers(markersArray) {
+                        for (var i = 0; i < markersArray.length; i++) {
+                            markersArray[i].setMap(null);
+                        }
+                        markersArray = [];
+                    }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=yourkey"
+                            async defer></script>
+                    <!--地圖end-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_Cancel" data-dismiss="modal">取 消</button>
+                    <button type="submit" class="btn btn_Send" id="submit">打 卡</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- AttendeeListModal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:'微軟正黑體';font-weight:bold">出席名單</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:'微軟正黑體';font-weight:bold">已出席成員</h5>
+                @foreach (var item in Model.已出席名單)
+                {
+                    <div class="row align-items-start">
+                        <div class="form-group col-md">
+                            <img class="rounded-circle img-fluid" src="~/Profile_picture/@item.會員大頭貼" alt="大頭貼" style="width:50px;height:50px;">
+                            @if (Session["Name"].ToString() == item.會員名稱)
+                            {
+                                <a style="font-family:'微軟正黑體'" href="@Url.Action("Profile_Index")">@item.會員名稱</a>
+                            }
+                            @if (Session["Name"].ToString() != item.會員名稱)
+                            {
+                                <a style="font-family:'微軟正黑體'" href="@Url.Action("MemberPage")?f會員名稱=@item.會員名稱">@item.會員名稱</a>
+                            }
+                        </div>
+                    </div>
+
+                }
+                <hr>
+                <h5 class="modal-title" id="exampleModalLongTitle" style="font-family:'微軟正黑體';font-weight:bold">未出席成員</h5>
+                @foreach (var item in Model.未出席名單)
+                {
+                    <div class="row align-items-start">
+                        <div class="form-group col-md">
+                            <img class="rounded-circle img-fluid" src="~/Profile_picture/@item.會員大頭貼" alt="大頭貼" style="width:50px;height:50px;">
+                            @if (Session["Name"].ToString() == item.會員名稱)
+                            {
+                                <a style="font-family:'微軟正黑體'" href="@Url.Action("Profile_Index")">@item.會員名稱</a>
+                            }
+                            @if (Session["Name"].ToString() != item.會員名稱)
+                            {
+                                <a style="font-family:'微軟正黑體'" href="@Url.Action("MemberPage")?f會員名稱=@item.會員名稱">@item.會員名稱</a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn_Cancel" data-dismiss="modal">關 閉</button>             
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('whatever'); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this);
+        modal.find('.modal-title').html('距離' + '<span style="color:#FAAB1A">' + '1.0公里' + '</span>' + '內才可打卡');
+        modal.find('.modal-body input[name="f開團編號"]').val(recipient);
+    });
+</script>
+

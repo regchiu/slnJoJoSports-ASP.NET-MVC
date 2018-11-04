@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="prjJoJoSports_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="t訂閱名單">
+    <Key>
+      <PropertyRef Name="f訂閱名單編號" />
+    </Key>
+    <Property Name="f訂閱名單編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f會員名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f訂閱會員名稱" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="t留言板回覆">
+    <Key>
+      <PropertyRef Name="f留言板回覆編號" />
+    </Key>
+    <Property Name="f留言板回覆編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f開團留言板編號" Type="int" />
+    <Property Name="f會員名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f回覆內容" Type="nvarchar(max)" />
+    <Property Name="f發布時間" Type="datetime" />
+  </EntityType>
+  <EntityType Name="t參加名單">
+    <Key>
+      <PropertyRef Name="f參加名單編號" />
+    </Key>
+    <Property Name="f參加名單編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f開團編號" Type="int" />
+    <Property Name="f會員名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f狀態" Type="nvarchar" MaxLength="10" />
+    <Property Name="f是否出席" Type="nvarchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="t開團">
+    <Key>
+      <PropertyRef Name="f開團編號" />
+    </Key>
+    <Property Name="f開團編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f團長名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f運動項目名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f標題" Type="nvarchar" MaxLength="50" />
+    <Property Name="f備註" Type="nvarchar(max)" />
+    <Property Name="f活動開始時間" Type="datetime" />
+    <Property Name="f活動結束時間" Type="datetime" />
+    <Property Name="f貼文發布時間" Type="datetime" />
+    <Property Name="f報名截止時間" Type="datetime" />
+    <Property Name="f人數上限" Type="int" />
+    <Property Name="f活動地點" Type="nvarchar" MaxLength="100" />
+    <Property Name="f緯度" Type="decimal" Precision="10" Scale="8" />
+    <Property Name="f經度" Type="decimal" Precision="11" Scale="8" />
+    <Property Name="f狀態" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="t開團留言板">
+    <Key>
+      <PropertyRef Name="f開團留言板編號" />
+    </Key>
+    <Property Name="f開團留言板編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f開團編號" Type="int" />
+    <Property Name="f會員名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f留言內容" Type="nvarchar(max)" />
+    <Property Name="f發布時間" Type="datetime" />
+  </EntityType>
+  <EntityType Name="t開團評價">
+    <Key>
+      <PropertyRef Name="f開團評價編號" />
+    </Key>
+    <Property Name="f開團評價編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f開團編號" Type="int" />
+    <Property Name="f會員名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f評論" Type="nvarchar(max)" />
+    <Property Name="f評分" Type="int" />
+    <Property Name="f活動照片1" Type="nvarchar(max)" />
+    <Property Name="f活動照片2" Type="nvarchar(max)" />
+    <Property Name="f活動照片3" Type="nvarchar(max)" />
+    <Property Name="f活動照片4" Type="nvarchar(max)" />
+    <Property Name="f活動照片5" Type="nvarchar(max)" />
+    <Property Name="f發布時間" Type="datetime" />
+  </EntityType>
+  <EntityType Name="t會員狀態">
+    <Key>
+      <PropertyRef Name="f會員狀態編號" />
+    </Key>
+    <Property Name="f會員狀態編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f帳號" Type="nvarchar" MaxLength="50" />
+    <Property Name="f名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f大頭貼" Type="nvarchar(max)" />
+    <Property Name="f個人簡介" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="t會員資料">
+    <Key>
+      <PropertyRef Name="f會員資料編號" />
+    </Key>
+    <Property Name="f會員資料編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f帳號" Type="nvarchar" MaxLength="50" />
+    <Property Name="f密碼" Type="nvarchar" MaxLength="50" />
+    <Property Name="f姓名" Type="nvarchar" MaxLength="50" />
+    <Property Name="f名稱" Type="nvarchar" MaxLength="50" />
+    <Property Name="f性別" Type="nvarchar" MaxLength="2" />
+    <Property Name="f電話" Type="nvarchar" MaxLength="50" />
+    <Property Name="f生日" Type="date" />
+  </EntityType>
+  <EntityType Name="t運動項目">
+    <Key>
+      <PropertyRef Name="f運動項目編號" />
+    </Key>
+    <Property Name="f運動項目編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f運動名稱" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="t縣市名稱">
+    <Key>
+      <PropertyRef Name="f縣市名稱編號" />
+    </Key>
+    <Property Name="f縣市名稱編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f縣市名稱" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="prjJoJoSports_dbModelStoreContainer">
+    <EntitySet Name="t訂閱名單" EntityType="Self.t訂閱名單" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t留言板回覆" EntityType="Self.t留言板回覆" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t參加名單" EntityType="Self.t參加名單" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t開團" EntityType="Self.t開團" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t開團留言板" EntityType="Self.t開團留言板" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t開團評價" EntityType="Self.t開團評價" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t會員狀態" EntityType="Self.t會員狀態" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t會員資料" EntityType="Self.t會員資料" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t運動項目" EntityType="Self.t運動項目" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="t縣市名稱" EntityType="Self.t縣市名稱" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

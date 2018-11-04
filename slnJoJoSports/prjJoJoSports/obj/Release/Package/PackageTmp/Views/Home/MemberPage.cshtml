@@ -1,0 +1,350 @@
+﻿@model prjJoJoSports.Models.ViewModel
+
+<style type="text/css">
+
+    /*標題過長使用...*/
+    .teamtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .group {
+        position: relative;
+        /*width: 50%;*/
+    }
+
+        .group:hover .image {
+            opacity: 0.3;
+        }
+
+        .group:hover .middle {
+            opacity: 1;
+        }
+
+    .text {
+        font-weight: bold;
+        font-family: "微軟正黑體";
+        color: dimgray;
+    }
+
+    .div-inline {
+        display: inline
+    }
+
+    .btn_Cancel {
+        padding: 10px 30px;
+        border: 1px solid #FFFFFF;
+        background-color: dimgrey;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Cancel:hover {
+            background: none;
+            background-color: dimgrey;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Cancel:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Subscribe {
+        padding: 10px 30px;
+        border: 1px solid #FFFFFF;
+        background-color: #dc3545;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Subscribe:hover {
+            background: none;
+            background-color: #dc3545;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Subscribe:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Detail {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-family: '微軟正黑體';
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Detail:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Detail:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_HistoryDetail {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #2c3d47;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_HistoryDetail:hover {
+            background: none;
+            background-color: #2c3d47;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #FFFFFF;
+        }
+
+        .btn_HistoryDetail:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+
+
+
+
+
+<!--個人資料和訂閱鈕-->
+@foreach (var item in Model.會員狀態)
+{
+    <div class="container" style="margin-top:50px;margin-bottom:50px">
+        <div class="row">
+            <img class="rounded-circle img-fluid d-block mx-auto" src="~/Profile_picture/@item.f大頭貼" alt="大頭貼" style="width:200px;height:200px;">
+            <div class="card-body" style="margin-bottom:30px">
+                <h1 class="card-title div-inline" style="font-family:'微軟正黑體';font-weight:bold">@item.f名稱</h1>
+
+                @if (ViewBag.狀態 == "未訂閱")
+                {
+                    <a href="@Url.Action("Subscribe")?f訂閱會員大頭貼=@item.f大頭貼&&f訂閱會員名稱=@item.f名稱" class="btn btn_Subscribe div-inline float-right" style="font-family:'微軟正黑體';font-size:large;margin-right:10px">訂閱</a>
+
+                }
+                @if (ViewBag.狀態 == "已訂閱")
+                {
+                    <a href="@Url.Action("UnSubscribe")?f訂閱名單編號=@ViewBag.訂閱編號" class="btn btn_Cancel div-inline float-right" style="font-family:'微軟正黑體';font-size:large;margin-right:10px" onclick="return confirm('確定要取消訂閱 @item.f名稱 嗎?')">取消訂閱</a>
+                }
+
+
+                <h4 class="card-text" style="font-family:'微軟正黑體'" title="個人簡介"> <textarea class="form-control" id="f個人簡介" name="f個人簡介" rows="5" style="resize:none;border:none;background-color:#ffffff" disabled>@item.f個人簡介</textarea></h4>
+            </div>
+        </div>
+
+        <h4 style="font-family:'微軟正黑體';margin-top:50px">@item.f名稱 目前開的團</h4>
+        <hr />
+        @if (Model.開團.Count() == 0)
+        {
+            <h4 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">目前沒有開團</h4>
+        }
+        @foreach (var item2 in Model.開團)
+        {
+            <div class="container" style="margin-top:30px">
+                <!-- Project One -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_350x350/@item2.f運動項目名稱/default.jpg" alt="NewTeam Image">
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="margin-bottom:10px">
+                        <h3 class="teamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item2.f標題</h3>
+                        <p style="font-family:'微軟正黑體'">@item2.f團長名稱</p>
+                        <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item2.f運動項目名稱</h5>
+                        <p style="font-family:'微軟正黑體';margin:auto">活動時間</p>
+                        <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item2.f活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item2.f活動開始時間.ToString()).ToShortTimeString() 至 @DateTime.Parse(item2.f活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item2.f活動結束時間.ToString()).ToShortTimeString()</p>
+                        <div class="row align-items-end">
+                            <div class="col-md-7">
+                                <p style="font-family:'微軟正黑體';margin:auto">報名截止時間</p>
+                                <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item2.f報名截止時間.ToString()).ToShortDateString() @DateTime.Parse(item2.f報名截止時間.ToString()).ToShortTimeString()</p>
+                            </div>
+                            <div class="col-md-5">
+                                <a href="@Url.Action("NewTeamDetail")?f開團編號=@item2.f開團編號" class="btn btn_Detail float-right" style="margin-top:10px">查看詳細內容</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @{
+
+                            var str = "https://www.google.com.tw/maps/place/";
+                            var place = item2.f活動地點 + "/@";
+                            var lat = item2.f緯度;
+                            var lng = "," + item2.f經度;
+                            var zoom = "," + "16z";
+                            var googlemap = str + place + lat + lng + zoom;
+                        }
+                        <div class="form-group">
+                            <a href="@googlemap" target="_blank" data-toggle="tooltip" data-placement="top" title="點擊規劃路線">
+                                <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="https://maps.googleapis.com/maps/api/staticmap?center=@item2.f緯度,@item2.f經度&zoom=16&size=400x300&maptype=roadmap&markers=color:red%7Clabel:%7C@(item2.f緯度),@item2.f經度&key=AIzaSyDLHTWPPSQC2TvnjpMT7t0hwCJ6c0CGLmA" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <hr>
+            </div>
+        }
+
+        <h4 style="font-family:'微軟正黑體';margin-top:50px">@item.f名稱 開團歷史紀錄</h4>
+        <hr />
+        @if (Model.舊團.Count() == 0)
+        {
+            <h4 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">無開團歷史紀錄</h4>
+        }
+        @foreach (var item2 in Model.舊團)
+        {
+            <!--所開歷史團-->
+            <div class="container" style="margin-top:30px">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_700x400/@item2.運動項目名稱/default.jpg">
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3" style="margin-bottom:10px">
+                        <h3 class="teamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item2.標題</h3>
+                        <p style="font-family:'微軟正黑體'">@item2.團長名稱</p>
+                        <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item2.運動項目名稱</h5>
+                        <p style="font-family:'微軟正黑體';margin:auto">活動結束時間</p>
+                        <p style="font-family:'微軟正黑體';font-weight:bold">@item2.活動結束時間</p>
+                    </div>
+                    <div class="col-md-2 align-self-end">
+                        <a href="@Url.Action("OldTeamDetail")?f開團編號=@item2.開團編號" class="btn btn_HistoryDetail align-self-md-center" style="margin-bottom:20px">查看詳細內容</a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group align-self-end">
+                            @if (item2.平均評分 == null)
+                            {
+                                <div class="text-center" id="rateYo_@item2.開團編號"></div>
+                                <br />
+                                <div class="display-4 text-center">尚無評分</div>
+                                <script>
+                                    $(function () {
+                                        $("#rateYo_@item2.開團編號").rateYo({
+                                            rating: 0,
+                                            readOnly: true
+                                        });
+                                    });
+                                    // Getter
+                                    var readOnly = $("#rateYo_@item2.開團編號").rateYo("option", "readOnly"); //returns true
+                                    // Setter
+                                    $("#rateYo_@item2.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                                </script>
+                            }
+                            else
+                            {
+                                <div class="text-center" id="rateYo_@item2.開團編號"></div>
+                                <br />
+                                <div class="display-2 text-center">@(((double)item2.平均評分).ToString("F1"))</div>
+                                <script>
+                                    $(function () {
+                                        $("#rateYo_@item2.開團編號").rateYo({
+                                            rating: @item2.平均評分,
+                                            readOnly: true
+                                        });
+                                    });
+                                    // Getter
+                                    var readOnly = $("#rateYo_@item2.開團編號").rateYo("option", "readOnly"); //returns true
+                                    // Setter
+                                    $("#rateYo_@item2.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                                </script>
+                            }
+                            @if (item2.是否出席 == 0)
+                            {
+                                <div class="text-center bg-danger" style="font-family:'微軟正黑體';font-weight:bold;color:white">未出席該活動</div>
+                            }
+                            else
+                            {
+                                <div class="text-center bg-success" style="font-family:'微軟正黑體';font-weight:bold;color:white">出席該活動</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        }
+    </div>
+
+}
+

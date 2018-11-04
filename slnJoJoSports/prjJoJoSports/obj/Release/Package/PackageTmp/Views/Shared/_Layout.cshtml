@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>JoJoSports</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/fontawesome-free-5.3.1-web/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/fontawesome-free-5.3.1-web/css/solid.css" rel="stylesheet" />
+    <link href="~/fontawesome-free-5.3.1-web/css/brands.css" rel="stylesheet" />
+    <script src="~/fontawesome-free-5.3.1-web/js/solid.js"></script>
+    <script src="~/fontawesome-free-5.3.1-web/js/brands.js"></script>
+    <script src="~/fontawesome-free-5.3.1-web/js/fontawesome.js"></script>
+    <!-- Custom styles for this template-->
+    <link href="~/Content/scrolling-nav.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <!--Rate Yo!-->
+    <link href="~/Content/jquery.rateyo.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.rateyo.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color:#344955">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/Logo/home_Icon.PNG" class="img-fluid" alt="Responsive image" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Login" style="color:white;font-weight:bold;font-family:'微軟正黑體'">登入</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Register" style="color:white;font-weight:bold;font-family:'微軟正黑體'">註冊</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer class="py-5" style="background-color:#344955">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <a>
+                        <img src="~/Logo/home_FooterIcon.png" class="img-fluid" alt="Responsive image" />
+                    </a>
+                    <p class="m-0 text-white">Connect. Be Seen. Be Discovered</p>
+                </div>
+                <div class="col-sm">
+                    @*空格*@
+                </div>
+                <div class="col-sm">
+                    <p class="m-0 text-right text-white"><br /></p>
+                    <p class="m-0 text-right text-white">JoJoSports&copy;2018</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</body>
+</html>

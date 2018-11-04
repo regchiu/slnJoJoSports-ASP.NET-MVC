@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="prjJoJoSports" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\期末專題\\slnJoJoSports\\prjJoJoSports\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\期末專題\\slnJoJoSports\\prjJoJoSports\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="dbJoJoSportsEntities-Web.config Connection String" description="" value="metadata=res://*/Models.dbJoJoSportsModel.csdl|res://*/Models.dbJoJoSportsModel.ssdl|res://*/Models.dbJoJoSportsModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\dbJoJoSports.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\期末專題\\slnJoJoSports\\prjJoJoSports\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='dbJoJoSportsEntities']/@connectionString" />
+  </parameter>
+  <parameter name="prjJoJoSports_dbEntities-Web.config Connection String" description="" value="metadata=res://*/Models.prjJoJoSports_dbModel.csdl|res://*/Models.prjJoJoSports_dbModel.ssdl|res://*/Models.prjJoJoSports_dbModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=prjjojosportsdbserver.database.windows.net;Initial Catalog=prjJoJoSports_db;Persist Security Info=True;User ID=102iii03;Password=P@ssw0rd&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\期末專題\\slnJoJoSports\\prjJoJoSports\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='prjJoJoSports_dbEntities']/@connectionString" />
+  </parameter>
+</parameters>

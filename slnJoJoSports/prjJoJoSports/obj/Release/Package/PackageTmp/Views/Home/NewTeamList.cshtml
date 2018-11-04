@@ -1,0 +1,257 @@
+﻿@model IEnumerable<prjJoJoSports.Models.t開團>
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+
+    /*標題過長使用...*/
+    .newteamtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .btn_Detail {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Detail:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Detail:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+<div class="container" style="margin-top:80px;margin-bottom:130px">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">找新團</h2>
+            <hr />
+        </div>
+    </div>
+
+    <!--搜尋欄位-->
+    @using (Html.BeginForm("NewTeamList", "Home", FormMethod.Get))
+    {
+        <div class="container" style="margin-top:50px;margin-bottom:50px">
+            <div class="row align-items-center justify-content-center">
+                <div class="input-group col-md-3">
+                    @Html.DropDownList("search縣市", ((IEnumerable<SelectListItem>)ViewBag.CountyName), "縣市名稱", new { @class = "form-control", @style = "font-family:'微軟正黑體'", @onchange = "this.form.submit();" })
+                </div>
+                <div class="input-group col-md-3">
+                    @Html.DropDownList("search運動", ((IEnumerable<SelectListItem>)ViewBag.SportsName), "運動項目", new { @class = "form-control", @style = "font-family:'微軟正黑體'", @onchange = "this.form.submit();" })
+                </div>
+                <div class="input-group  col-md-3">
+                    <input type="text" class="form-control" placeholder="關鍵字搜尋" id="Search" style="font-family:'微軟正黑體'">
+                    <div class="input-group-append">
+                        <div class="input-group-text text-white" style="background-color:#faab1a"><i class="fas fa-search"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!--搜尋欄位end-->
+    <!--地圖-->
+    <div class="container" style="margin-top:50px">
+        <div class="col">
+            <!--GoogleMap-->
+            <div id="map"></div>
+            <script>
+            var marker;
+            var map, infoWindow;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 13
+                });
+                infoWindow = new google.maps.InfoWindow;
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent('目前位置');
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                        marker = new google.maps.Marker({
+                            map: map,
+                            animation: google.maps.Animation.DROP,
+                            position: pos,
+                        });
+                        var infowindow = new google.maps.InfoWindow({
+                            content: '目前位置'
+                        });
+                        marker.addListener('click', function() {
+                          infowindow.open(map, marker);
+                        });
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+
+
+                var locations = [
+                   @foreach (var item in Model)
+                   {
+                       var str = "https://www.google.com.tw/maps/place/";
+                       var place = item.f活動地點 + "/@";
+                       var lat = item.f緯度;
+                       var lng = "," + item.f經度;
+                       var zoom = "," + "16z";
+                       var googlemap = str + place + lat + lng + zoom;
+
+                       @:['<a href="@Url.Action("NewTeamDetail")?f開團編號=@item.f開團編號">@item.f標題</a><br />@item.f活動地點<br /><a href="@googlemap" target="_blank">在 Google 地圖上查看</a>','@item.f運動項目名稱',@item.f緯度,@item.f經度],
+                   }
+                ];
+
+                var sportsmarker;
+                var infowindow = new google.maps.InfoWindow({});
+                for (var count = 0; count < locations.length; count++) {
+                    sportsmarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[count][2], locations[count][3]),
+                        map: map,
+                        title: locations[count][0],
+                        //icon: 'http://localhost:50259/GoogleMapIcon/' + locations[count][1]+'.png' //本機測試
+                        icon: 'https://prjjojosports.azurewebsites.net/GoogleMapIcon/' + locations[count][1] + '.png' //上傳Azure
+                    });
+                    google.maps.event.addListener(sportsmarker, 'click', (function (sportsmarker, count) {
+                        return function () {
+                            infowindow.setContent(locations[count][0]);
+                            infowindow.open(map, sportsmarker);
+                        };
+                    })(sportsmarker, count));
+                }
+            }
+
+            //Geolocation(定位)
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                    'Error: 地理位置服務失敗' :
+                    'Error: 您的瀏覽器不支持地理定位');
+                infoWindow.open(map);
+            }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLHTWPPSQC2TvnjpMT7t0hwCJ6c0CGLmA&callback=initMap"
+                    async defer></script>
+        </div>
+    </div>
+    <!--地圖end-->
+
+    @foreach (var item in Model)
+    {
+        <div class="container Search" style="margin-top:80px">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_350x350/@item.f運動項目名稱/default.jpg" alt="NewTeam Image">
+                    </div>
+                </div>
+                <div class="col-md-5" style="margin-bottom:10px">
+                    <h3 class="newteamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.f標題</h3>
+                    @if (Session["Name"].ToString() == item.f團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("Profile_Index")">@item.f團長名稱</a></p>
+                    }
+                    @if (Session["Name"].ToString() != item.f團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("MemberPage")?f會員名稱=@item.f團長名稱">@item.f團長名稱</a></p>
+                    }
+
+                    <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.f運動項目名稱</h5>
+                    <p style="font-family:'微軟正黑體';margin:auto">活動時間</p>
+                    <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.f活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動開始時間.ToString()).ToShortTimeString() 至 @DateTime.Parse(item.f活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動結束時間.ToString()).ToShortTimeString()</p>
+                    <div class="row align-items-end">
+                        <div class="col-md-7">
+                            <p style="font-family:'微軟正黑體';margin:auto">報名截止時間</p>
+                            <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.f報名截止時間.ToString()).ToShortDateString() @DateTime.Parse(item.f報名截止時間.ToString()).ToShortTimeString()</p>
+
+                        </div>
+                        <div class="col-md-5">
+                            <a href="@Url.Action("NewTeamDetail")?f開團編號=@item.f開團編號" class="btn btn_Detail float-right" style="margin-top:10px">查看詳細內容</a>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-4">
+                    @{
+
+                        var str = "https://www.google.com.tw/maps/place/";
+                        var place = item.f活動地點 + "/@";
+                        var lat = item.f緯度;
+                        var lng = "," + item.f經度;
+                        var zoom = "," + "16z";
+                        var googlemap = str + place + lat + lng + zoom;
+                    }
+                    <div class="form-group">
+                        <a href="@googlemap" target="_blank" data-toggle="tooltip" data-placement="top" title="點擊規劃路線">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="https://maps.googleapis.com/maps/api/staticmap?center=@item.f緯度,@item.f經度&zoom=16&size=400x300&maptype=roadmap&markers=color:red%7Clabel:%7C@(item.f緯度),@item.f經度&key=AIzaSyDLHTWPPSQC2TvnjpMT7t0hwCJ6c0CGLmA" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <hr>
+        </div>
+    }
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) !== -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>

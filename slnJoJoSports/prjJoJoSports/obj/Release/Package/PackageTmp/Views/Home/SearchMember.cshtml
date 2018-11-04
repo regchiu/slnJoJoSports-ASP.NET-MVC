@@ -1,0 +1,87 @@
+﻿@model IEnumerable<prjJoJoSports.Models.t會員狀態>
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<!--會員搜尋欄--->
+<div class="container" style="margin-top:50px">
+    <div class="row align-items-center justify-content-center">
+        <div class="input-group  col-md-3">
+            <input type="text" class="form-control" placeholder="尋找會員" id="Search">
+            <div class="input-group-append">
+                <div class="input-group-text text-white" style="background-color:#faab1a"><i class="fas fa-search"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--會員列表--->
+<div class="container" style="margin-top:80px;margin-bottom:130px">
+    <div class="row">
+        <div class="col-lg-12" style="margin-bottom:50px">
+            <h2 class="my-4" style="font-family:'微軟正黑體';font-weight:bold">我們的會員</h2>
+            <hr />
+        </div>
+        @foreach (var item in Model)
+        {
+            <!-- Team Members Row -->
+            if (Session["Name"].ToString() != item.f名稱)
+            {
+                <div class="col-lg-4 col-sm-6 text-center mb-4 Search">
+                    <a href="@Url.Action("MemberPage")?f會員名稱=@item.f名稱">
+                        <img class="rounded-circle img-fluid" src="~/Profile_picture/@item.f大頭貼" alt="大頭貼" style="width:200px;height:200px">
+                    </a>
+                    <h4 style="font-family:'微軟正黑體';font-weight:bold">@item.f名稱</h4>
+                </div>
+            }
+            if (Session["Name"].ToString() == item.f名稱)
+            {
+                <div class="col-lg-4 col-sm-6 text-center mb-4 Search">
+                    <a href="@Url.Action("Profile_Index")">
+                        <img class="rounded-circle img-fluid" src="~/Profile_picture/@item.f大頭貼" alt="大頭貼" style="width:200px;height:200px">
+                    </a>
+                    <h4 style="font-family:'微軟正黑體';font-weight:bold">@item.f名稱</h4>
+                </div>
+            }
+
+        }
+
+    </div>
+</div>
+
+
+<script>
+    $("#Search").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("GetSearchMemberName","Home")',
+                dataType: "json",
+                data: { search: $("#Search").val() },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { value: item.fName };
+                    }));
+                },
+                error: function (xhr, status, error) {
+                    alert("Error");
+                }
+            });
+        }
+    });
+
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+        });
+</script>

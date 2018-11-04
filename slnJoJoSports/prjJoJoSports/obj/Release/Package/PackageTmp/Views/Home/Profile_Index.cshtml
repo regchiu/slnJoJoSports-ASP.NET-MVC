@@ -1,0 +1,21 @@
+﻿@model prjJoJoSports.Models.t會員狀態
+<div class="container" style="margin-top:50px">
+    <div class="row">
+        <img class="rounded-circle img-fluid d-block mx-auto" src="~/Profile_picture/@Model.f大頭貼" alt="大頭貼" style="width:200px;height:200px;">
+        <div class="card-body">
+            <h2 class="card-title" style="font-family:'微軟正黑體';font-weight:bold">@Model.f名稱</h2>
+            <h4 class="card-text" style="font-family:'微軟正黑體'" title="個人簡介"> <textarea class="form-control" id="f個人簡介" name="f個人簡介" rows="5" style="resize:none;border:none;background-color:#ffffff" disabled>@Model.f個人簡介</textarea></h4>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div style="width:100%">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="font-family:'微軟正黑體'">生日<br /><a style="font-weight:bold">@Session["Birthday"]</a></li>
+                <li class="list-group-item" style="font-family:'微軟正黑體'">性別<br /><a style="font-weight:bold">@Session["Gender"]</a></li>
+                <li class="list-group-item" style="font-family:'微軟正黑體'">信箱<br /><a style="font-weight:bold">@Session["Email"]</a></li>
+                <li class="list-group-item" style="font-family:'微軟正黑體'">電話<br /><a style="font-weight:bold">@Session["Phone"]</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

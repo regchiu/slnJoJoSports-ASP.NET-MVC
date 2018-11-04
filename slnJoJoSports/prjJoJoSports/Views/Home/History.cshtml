@@ -1,0 +1,348 @@
+﻿@model prjJoJoSports.Models.ViewModel
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<style type="text/css">
+    /*標題過長使用...*/
+    .teamtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .btn_Detail {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #2c3d47;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Detail:hover {
+            background: none;
+            background-color: #2c3d47;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #FFFFFF;
+        }
+
+        .btn_Detail:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Upload {
+        padding: 5px 11px;
+        border: 1px solid #C7C7C7;
+        background-color: #edf0f2;
+        -webkit-border-radius: 1px;
+        -moz-border-radius: 1px;
+        border-radius: 1px;
+        color: #384652;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        text-decoration: none;
+        font-weight: bold;
+        -webkit-transition: 0.2s;
+        -moz-transition: 0.2s;
+        -o-transition: 0.2s;
+        cursor: pointer;
+    }
+
+        .btn_Upload:hover {
+            background: none;
+            background-color: #edf0f2;
+            border: 1px solid #ffffff;
+            color: #384652;
+        }
+
+        .btn_Upload:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Send {
+        padding: 5px 16px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Send:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Send:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Cancel {
+        padding: 5px 10px;
+        border: 1px solid #FFFFFF;
+        background-color: #8ba7b8;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Cancel:hover {
+            background: none;
+            background-color: #8ba7b8;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Cancel:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:50px">
+
+    @if (Model.歷史紀錄.Count() == 0)
+    {
+        <h2 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">您沒有任何活動結束的參加團或創建團</h2>
+        <hr />
+        <h4 class="text-center" style="font-family:'微軟正黑體';font-weight:bold"><a href="@Url.Action("NewTeamList")">去參團吧</a></h4>
+        <h4 class="text-center" style="font-family:'微軟正黑體';font-weight:bold"><a href="@Url.Action("CreateNewTeam")">去開團吧</a></h4>
+    }
+    @if (Model.歷史紀錄.Count() != 0)
+    {
+        <h2 style="font-family:'微軟正黑體';font-weight:bold">您的歷史開團和參團紀錄</h2>
+        <hr />
+    }
+
+    @foreach (var item in Model.歷史紀錄)
+    {
+        <div class="container Search" style="margin-top:30px">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_700x400/@item.運動項目名稱/default.jpg" alt="NewTeam Image">
+                    </div>
+                </div>
+                <div class="col-md-3" style="margin-bottom:10px">
+                    <h3 class="teamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.標題</h3>
+                    @if (Session["Name"].ToString() == item.團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("Profile_Index")">@item.團長名稱</a></p>
+                    }
+                    @if (Session["Name"].ToString() != item.團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("MemberPage")?f會員名稱=@item.團長名稱">@item.團長名稱</a></p>
+                    }
+                    <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.運動項目名稱</h5>
+                    <p style="font-family:'微軟正黑體';margin:auto">活動結束時間</p>
+                    <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.活動結束時間.ToString()).ToShortTimeString()</p>
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <a href="@Url.Action("OldTeamDetail")?f開團編號=@item.開團編號" class="btn btn_Detail align-self-md-center" style="margin-bottom:20px">查看詳細內容</a>
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <div class="form-group">
+                        @if (item.平均評分 == null)
+                        {
+                            <div class="text-center" id="rateYo_@item.開團編號"></div>
+                            <br />
+                            <div class="display-4 text-center">尚無評分</div>
+                            <script>
+                                $(function () {
+                                    $("#rateYo_@item.開團編號").rateYo({
+                                        rating: 0,
+                                        readOnly: true
+                                    });
+                                });
+                                // Getter
+                                var readOnly = $("#rateYo_@item.開團編號").rateYo("option", "readOnly"); //returns true
+                                // Setter
+                                $("#rateYo_@item.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                            </script>
+                        }
+                        else
+                        {
+                            <div class="text-center" id="rateYo_@item.開團編號"></div>
+                            <br />
+                            <div class="display-2 text-center">@(((double)item.平均評分).ToString("F1"))</div>
+                            <script>
+                                $(function () {
+                                $("#rateYo_@item.開團編號").rateYo({
+                                    rating: @item.平均評分,
+                                        readOnly: true
+                                    });
+                                });
+                                // Getter
+                                var readOnly = $("#rateYo_@item.開團編號").rateYo("option", "readOnly"); //returns true
+                                // Setter
+                                $("#rateYo_@item.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                            </script>
+                        }
+
+                        @if (item.是否出席 == 0)
+                        {
+
+                            <button type="button" class="btn btn-link btn-block btn-lg" style="font-family:'微軟正黑體';font-weight:bold" disabled>您未出席</button>
+
+                        }
+                        else
+                        {
+                            if (item.是否評分 == 0)
+                            {
+
+                                <button type="button" class="btn btn-link btn-block btn-lg" data-toggle="modal" data-target="#exampleModal" data-title="@item.標題" data-whatever="@item.開團編號" style="font-family:'微軟正黑體';font-weight:bold">您尚未評分</button>
+
+                            }
+                            else
+                            {
+
+                                <button type="button" class="btn btn-link btn-block btn-lg" style="font-family:'微軟正黑體';font-weight:bold" disabled>您已評分</button>
+
+                            }
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    }
+</div>
+@using (Html.BeginForm("AddReview", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!--Model-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'微軟正黑體';font-weight:bold"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="f開團編號" name="f開團編號">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="f評分" name="f評分" value="0" class="form-control" />
+                        <div id="rateYo"></div>
+                        <script>
+                            $(function () {
+                                var $rateYo = $("#rateYo").rateYo();
+
+                                $("#rateYo").rateYo({
+                                    fullStar: true
+                                });
+                                var normalFill = $("#rateYo").rateYo("option", "fullStar"); 
+                                $("#rateYo").rateYo("option", "fullStar", true);
+
+                                $("#rateYo").click(function () {
+                                    var rating = $rateYo.rateYo("rating");                                  
+                                    $('input[name="f評分"]').val(rating);
+
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="f評論" name="f評論" style="font-family:'微軟正黑體';font-weight:bold" placeholder="寫下您的感想和心得......"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="btn btn_Upload">
+                            上傳照片
+                            <input type="file" name="photos" id="photos" accept="image/gif, image/jpeg, image/png" style="font-family:'微軟正黑體';font-weight:bold;display:none" multiple />
+                        </label>
+
+                        <div id="preview_imgs" style="width:100%; height: 200px; overflow:scroll; font-family:'微軟正黑體'">
+                            <p>最多上傳5張照片，目前沒有照片</p>
+                        </div>
+                        <!-- JavaScript part -->
+                        <script>
+                            $("#photos").change(function () {
+                                $("#preview_imgs").html(""); // 清除預覽
+                                var files = this.files;
+                                if (files && files.length > 5) {
+                                    alert('最多上傳5張照片')
+                                    this.value = "" //刪除選擇的檔案
+                                    var noPictures = $("<p>最多上傳5張照片，目前沒有照片</p>");
+                                    $("#preview_imgs").append(noPictures);
+                                }
+                                readURL(this);
+                            });
+                            function readURL(input) {
+                                if (input.files && input.files.length >= 0) {
+                                    for (var i = 0; i < input.files.length; i++) {
+                                        var reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            var img = $("<img width='300' height='200'><hr>").attr('src', e.target.result);
+                                            $("#preview_imgs").append(img);
+                                        }
+                                        reader.readAsDataURL(input.files[i]);
+                                    }
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_Cancel" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn_Send" onclick="confirm('確定要送出評價嗎?')">送出評價</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var title = button.data('title')
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').html('留下您對 ' + '<span style="color:#FAAB1A">' + title + '</span>' + ' 的評價')
+        modal.find('.modal-body input[name="f開團編號"]').val(recipient)
+    })
+</script>

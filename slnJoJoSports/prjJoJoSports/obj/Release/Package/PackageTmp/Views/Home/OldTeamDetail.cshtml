@@ -1,0 +1,274 @@
+﻿@model prjJoJoSports.Models.ViewModel
+<link href="~/Content/slick.css" rel="stylesheet" />
+<link href="~/Content/slick-theme.css" rel="stylesheet" />
+
+<!--Lightbox for Bootstrap-->
+<link href="~/Content/ekko-lightbox.css" rel="stylesheet" />
+<script src="~/Scripts/ekko-lightbox.js"></script>
+
+<style type="text/css">
+    .img {
+        width: 210px;
+        height: 120px;
+        object-fit: scale-down;
+        background: rgba(255,255,255,0.0);
+    }
+</style>
+<!--照片背景欲透明background:rgba(255,255,255,0.0)-->
+<!-- Page Content -->
+@foreach (var item in Model.開團)
+{
+    <div class="container-fluid" style="margin-bottom:30px">
+        <div class="jumbotron" style="background-color:#f9fafb">
+            <div class="container">
+                <h1 class="text-center" style="font-family:微軟正黑體;font-weight:bold;color:#23323a">@item.f標題</h1>
+                <div class="row" style="margin-top:50px">
+                    <div class="col-md-7">
+                        <dl class="row" style="font-family:微軟正黑體;font-size:larger">
+                            <dt class="col-sm-4">團長</dt>
+                            @if (Session["Name"].ToString() == item.f團長名稱)
+                            {
+                                <dd class="col-sm-8"><a href="@Url.Action("Profile_Index")">@item.f團長名稱</a></dd>
+                            }
+                            @if (Session["Name"].ToString() != item.f團長名稱)
+                            {
+                                <dd class="col-sm-8"><a href="@Url.Action("MemberPage")?f會員名稱=@item.f團長名稱">@item.f團長名稱</a></dd>
+                            }
+
+                            <dt class="col-sm-4">運動項目</dt>
+                            <dd class="col-sm-8">@item.f運動項目名稱</dd>
+
+                            <dt class="col-sm-4">實到/報名人數</dt>
+                            <dd class="col-sm-8">@ViewBag.attend</dd>
+
+                            <dt class="col-sm-4">活動地址</dt>
+                            @*<dd class="col-sm-8 btn-block">@item.f活動地點</dd>*@
+                            <dd class="col-sm-8 btn-block btn-link" data-toggle="modal" data-target="#exampleModalCenter">@item.f活動地點</dd>
+
+                            <dt class="col-sm-4">活動開始時間</dt>
+                            <dd class="col-sm-8">@DateTime.Parse(item.f活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動開始時間.ToString()).ToShortTimeString()</dd>
+
+                            <dt class="col-sm-4">活動結束時間</dt>
+                            <dd class="col-sm-8">@DateTime.Parse(item.f活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動結束時間.ToString()).ToShortTimeString()</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-inline">
+
+                            @if (ViewBag.avgStar == null)
+                            {
+                                <div id="rateYo"></div>
+                                <script>
+                                    $(function () {
+                                        $("#rateYo").rateYo({
+                                            rating: 0,
+                                            readOnly: true
+                                        });
+                                    });
+                                    // Getter
+                                    var readOnly = $("#rateYo").rateYo("option", "readOnly"); //returns true
+
+                                    // Setter
+                                    $("#rateYo").rateYo("option", "readOnly", false); //returns a jQuery Element
+                                </script>
+                                <p class="display-4">尚無評分</p>
+                            }
+                            else
+                            {
+                                <div id="rateYo"></div>
+                                <script>
+                                $(function () {
+                                    $("#rateYo").rateYo({
+                                        rating: @ViewBag.avgStar,
+                                        readOnly: true
+                                    });
+                                });
+                                // Getter
+                                var readOnly = $("#rateYo").rateYo("option", "readOnly"); //returns true
+
+                                // Setter
+                                $("#rateYo").rateYo("option", "readOnly", false); //returns a jQuery Element
+                                </script>
+                                <p class="display-4">@(((double)ViewBag.avgStar).ToString("F1"))</p>
+                            }
+
+                        </div>
+
+                        <div class="box-body">
+                            <img class="card-img-top" src="~/Sports_picture_700x400/@item.f運動項目名稱/default.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Google地圖</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @{
+
+                        var str = "https://www.google.com.tw/maps/place/";
+                        var place = item.f活動地點 + "/@";
+                        var lat = item.f緯度;
+                        var lng = "," + item.f經度;
+                        var zoom = "," + "16z";
+                        var googlemap = str + place + lat + lng + zoom;
+                    }
+                    <div class="col align-self-center">
+                        <a href="@googlemap" target="_blank" data-toggle="tooltip" data-placement="top" title="點擊規劃路線">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="https://maps.googleapis.com/maps/api/staticmap?center=@item.f緯度,@item.f經度&zoom=16&size=500x300&maptype=roadmap&markers=color:red%7Clabel:%7C@(item.f緯度),@item.f經度&key=AIzaSyDLHTWPPSQC2TvnjpMT7t0hwCJ6c0CGLmA" />
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<!-- Single Comment -->
+
+<div class="container-fluid" style="margin-bottom:100px">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 style="font-family:'微軟正黑體';font-weight:bold">團員評價</h2>
+            <hr />
+            @foreach (var item2 in Model.開團評價)
+            {
+                <div class="jumbotron" style="background-color:#edf0f2">
+
+                    <!-- 會員資料行 -->
+                    <div class="form-inline">
+                        <div class="form-group mb-3">
+                            <img class="rounded-circle img-fluid" src="~/Profile_picture/@item2.會員大頭貼" style="width:70px;height:70px" />
+                        </div>
+                        <div class="form-group mx-sm-3 mb">
+                            @if (Session["Name"].ToString() == item2.會員名稱)
+                            {
+                                <p style="font-family:'微軟正黑體';font-weight:bold; font-size:x-large"><a href="@Url.Action("Profile_Index")">@item2.會員名稱</a></p>
+                            }
+                            @if (Session["Name"].ToString() != item2.會員名稱)
+                            {
+                                <p style="font-family:'微軟正黑體';font-weight:bold; font-size:x-large"><a href="@Url.Action("MemberPage")?f會員名稱=@item2.會員名稱">@item2.會員名稱</a></p>
+                            }
+
+
+                        </div>
+                        <div class="form-group mx-sm-3 mb">
+                            <p style="font-family:'微軟正黑體'">於 @item2.發布時間 &nbsp&nbsp發佈</p>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-4" id="rateYo_@item2.會員名稱">
+                        </div>
+                        <script>
+                                $(function () {
+
+                                    $("#rateYo_@item2.會員名稱").rateYo({
+                                        rating: @item2.評分,
+                                        readOnly: true
+                                    });
+                                });
+                                // Getter
+                                var readOnly = $("#rateYo_@item2.會員名稱").rateYo("option", "readOnly"); //returns true
+
+                                // Setter
+                                $("#rateYo_@item2.會員名稱").rateYo("option", "readOnly", false); //returns a jQuery Element
+                        </script>
+                    </div>
+
+                    <!-- 評論意見行 -->
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <p style="font-family:'微軟正黑體';font-size:larger">@item2.評論</p>
+                        </div>
+                    </div>
+
+                    <!--活動照片-->
+                    <div class="row justify-content-center" style="margin-top:20px">
+                        <div class="col-10">
+                            <div class="multiple-items">
+                                @{
+                                    if (@item2.活動照片1 != null)
+                                    {
+
+                                        <a href="~/Review_picture/@item2.活動照片1" data-toggle="lightbox" data-gallery="example-gallery">
+                                            <img class="img" src="~/Review_picture/@item2.活動照片1">
+                                        </a>
+
+
+                                    }
+                                    if (@item2.活動照片2 != null)
+                                    {
+
+                                        <a href="~/Review_picture/@item2.活動照片2" data-toggle="lightbox" data-gallery="example-gallery">
+                                            <img class="img" src="~/Review_picture/@item2.活動照片2">
+                                        </a>
+
+
+                                    }
+                                    if (@item2.活動照片3 != null)
+                                    {
+
+                                        <a href="~/Review_picture/@item2.活動照片3" data-toggle="lightbox" data-gallery="example-gallery">
+                                            <img class="img" src="~/Review_picture/@item2.活動照片3">
+                                        </a>
+
+
+                                    }
+                                    if (@item2.活動照片4 != null)
+                                    {
+
+                                        <a href="~/Review_picture/@item2.活動照片4" data-toggle="lightbox" data-gallery="example-gallery">
+                                            <img class="img" src="~/Review_picture/@item2.活動照片4">
+                                        </a>
+
+                                    }
+                                    if (@item2.活動照片5 != null)
+                                    {
+
+                                        <a href="~/Review_picture/@item2.活動照片5" data-toggle="lightbox" data-gallery="example-gallery">
+                                            <img class="img" src="~/Review_picture/@item2.活動照片5">
+                                        </a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <script src="~/Scripts/jquery-migrate-1.2.1.min.js"></script>
+            <script src="~/Scripts/slick.js"></script>
+            <script type="text/javascript">
+
+                $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                    event.preventDefault();
+                    $(this).ekkoLightbox();
+                });
+
+                $(document).ready(function () {
+                    $('.multiple-items').slick({
+                        infinite: true,
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    });
+                });
+            </script>
+
+
+        </div>
+    </div>
+</div>

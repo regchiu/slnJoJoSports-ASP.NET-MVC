@@ -1,0 +1,70 @@
+﻿@model prjJoJoSports.Models.ViewModel
+<style type="text/css">
+    .btn_Cancel {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: dimgrey;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Cancel:hover {
+            background: none;
+            background-color: dimgrey;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Cancel:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+<div class="container-fluid" style="margin-top:50px;margin-bottom:50px">
+    @if (Model.訂閱名單.Count() == 0)
+    {
+        <h2 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">您尚未訂閱任何其他會員</h2>
+        <hr />
+    }
+    <!--訂閱名單-->
+    @if (Model.訂閱名單.Count() != 0)
+    {
+        <h2 style="font-family:'微軟正黑體';font-weight:bold">您的訂閱追蹤清單</h2>
+        <hr />
+    }
+
+    <div class="container Search" style="margin-top:30px">
+        <div class="row">
+            @foreach (var item in Model.訂閱名單)
+            {
+                <div class="col-lg-4 text-center" style="margin-top:20px">
+                    <a href="@Url.Action("MemberPage")?f會員名稱=@item.訂閱會員名稱">
+                        <img class="rounded-circle img-fluid" src="~/Profile_picture/@item.訂閱會員大頭貼" alt="大頭貼" style="width:200px;height:200px">
+                    </a>
+                    <h2 style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.訂閱會員名稱</h2>
+                    <p><a href="@Url.Action("UnSubscribe")?f訂閱名單編號=@item.訂閱名單編號" class="btn btn_Cancel" onclick="return confirm('確定要取消訂閱 @item.訂閱會員名稱 嗎?')">取消訂閱</a></p>
+                </div>
+            }
+
+
+
+        </div><!-- /.row -->
+    </div>
+
+
+
+
+
+</div>

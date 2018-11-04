@@ -1,0 +1,405 @@
+﻿@model prjJoJoSports.Models.ViewModel
+<style>
+    .btn_Edit {
+        padding: 7.5px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Edit:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Edit:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Send {
+        padding: 5px 16px;
+        border: 1px solid #FFFFFF;
+        background-color: #FAAB1A;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Send:hover {
+            background: none;
+            background-color: #FAAB1A;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Send:active {
+            top: 1px;
+            position: relative;
+        }
+
+    .btn_Cancel {
+        padding: 5px 16px;
+        border: 1px solid #FFFFFF;
+        background-color: #8ba7b8;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Cancel:hover {
+            background: none;
+            background-color: #8ba7b8;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #17262a;
+        }
+
+        .btn_Cancel:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+@foreach (var item in Model.開團)
+{
+    <div class="container-fluid">
+        <div class="jumbotron" style="background-color:#f9fafb">
+            <div class="container">
+                <h1 class="text-center" style="font-family:微軟正黑體;font-weight:bold;color:#23323a">@item.f標題</h1>
+                <div class="row" style="margin-top:50px">
+                    <div class="col-md-7">
+                        <dl class="row" style="font-family:微軟正黑體;font-size:larger">
+                            <dt class="col-sm-4">團長</dt>
+                            @if (Session["Name"].ToString() == item.f團長名稱)
+                            {
+                                <dd class="col-sm-8"><a href="@Url.Action("Profile_Index")">@item.f團長名稱</a></dd>
+                            }
+                            @if (Session["Name"].ToString() != item.f團長名稱)
+                            {
+                                <dd class="col-sm-8"><a href="@Url.Action("MemberPage")?f會員名稱=@item.f團長名稱">@item.f團長名稱</a></dd>
+                            }
+
+                            <dt class="col-sm-4">運動項目</dt>
+                            <dd class="col-sm-8">@item.f運動項目名稱</dd>
+
+                            <dt class="col-sm-4">目前參團人數</dt>
+                            <dd class="col-sm-8">@ViewBag.CrewCount/@item.f人數上限</dd>
+
+                            <dt class="col-sm-4">活動地址</dt>
+                            <dd class="col-sm-8 btn-block btn-link" data-toggle="modal" data-target="#exampleModalCenter">@item.f活動地點</dd>
+
+                            <dt class="col-sm-4">活動開始時間</dt>
+                            <dd class="col-sm-8">@DateTime.Parse(item.f活動開始時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動開始時間.ToString()).ToShortTimeString()</dd>
+
+                            <dt class="col-sm-4">活動結束時間</dt>
+                            <dd class="col-sm-8">@DateTime.Parse(item.f活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.f活動結束時間.ToString()).ToShortTimeString()</dd>
+
+                            <dt class="col-sm-4">報名截止時間</dt>
+                            <dd class="col-sm-8">@DateTime.Parse(item.f報名截止時間.ToString()).ToShortDateString() @DateTime.Parse(item.f報名截止時間.ToString()).ToShortTimeString()</dd>
+
+                            <dt class="col-sm-4">備註</dt>
+                            <dd class="col-sm-8">@item.f備註</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="box-heading">
+                                <img class="card-img-top" src="~/Sports_picture_700x400/@item.f運動項目名稱/default.jpg">
+                            </div>
+                            <div class="box-body" style="margin-top:8px">
+
+                                @if (Session["Name"].ToString() == item.f團長名稱)
+                                {
+                                    if (ViewBag.End == "報名截止")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>報名截止</button>
+                                    }
+                                    else if (ViewBag.Clock == "活動進行中")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>活動進行中</button>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-block" style="background-color:#faab1a; font-size:larger; font-family:'微軟正黑體';font-weight:bold;color:whitesmoke" href="@Url.Action("CloseNewTeam")?f開團編號=@item.f開團編號" onclick="return confirm('確定要關閉此團嗎?')">關閉此團</a>
+                                    }
+
+                                }
+                                @if (Session["Name"].ToString() != item.f團長名稱 && ViewBag.Status == "未參加" && ViewBag.Full == "人數未滿")
+                                {
+                                    if (ViewBag.End == "報名截止")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>報名截止</button>
+                                    }
+                                    else if (ViewBag.Clock == "活動進行中")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>活動進行中</button>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-lg btn-block" style="background-color:#faab1a; font-size:larger; font-family:'微軟正黑體';font-weight:bold;color:whitesmoke" href="@Url.Action("Join")?f參加名單編號=@ViewBag.參加名單編號&&f開團編號=@item.f開團編號">我要參加</a>
+                                    }
+
+                                }
+                                @if (Session["Name"].ToString() != item.f團長名稱 && ViewBag.Status == "已參加" && (ViewBag.Full == "人數未滿" || ViewBag.Full == "人數已滿"))
+                                {
+                                    if (ViewBag.End == "報名截止")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>報名截止</button>
+                                    }
+                                    else if (ViewBag.Clock == "活動進行中")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>活動進行中</button>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-block" style="background-color:#faab1a; font-size:larger; font-family:'微軟正黑體';font-weight:bold;color:whitesmoke" href="@Url.Action("Leave")?f參加名單編號=@ViewBag.參加名單編號&&f開團編號=@item.f開團編號" onclick="return confirm('確定要退出嗎?')">我要退出</a>
+                                    }
+
+                                }
+                                @if (Session["Name"].ToString() != item.f團長名稱 && ViewBag.Status == "未參加" && ViewBag.Full == "人數已滿")
+                                {
+                                    if (ViewBag.End == "報名截止")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>報名截止</button>
+                                    }
+                                    else if (ViewBag.Clock == "活動進行中")
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>活動進行中</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-block" style="font-size:larger;font-family:微軟正黑體;font-weight:bold;background-color:#FAAB1A;color:#17262A" disabled>人數已滿</button>
+                                    }
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--留言版-->
+    <div class="container-fluid" style="margin-bottom:100px">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="panel panel-primary" style="margin-top:30px">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        @foreach (var item2 in Model.開團留言板)
+                        {
+                            <div class="media mb-4" style="padding-left:25px" id="refresh">
+                                <img class="d-flex mr-3 rounded-circle" src="~/Profile_picture/@item2.會員大頭貼" alt="avatar" style="width:50px;height:50px;">
+                                <div class="media-body">
+
+                                    <!--判斷點擊名字跳轉頁面-->
+                                    @if (Session["Name"].ToString() == item2.會員名稱)
+                                    {<!--為團長名稱跳到個人頁面-->
+                                        <strong class="primary-font"><a href="@Url.Action("Profile_Index")">@item2.會員名稱</a></strong>
+                                    }
+
+                                    @if (Session["Name"].ToString() != item2.會員名稱)
+                                    {
+                                        <strong class="primary-font"><a href="@Url.Action("MemberPage")?f會員名稱=@item2.會員名稱">@item2.會員名稱</a></strong>
+                                    }
+
+                                    <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>@item2.發布時間
+                                    </small>
+
+                                    <!--回覆按鈕-->
+
+                                    @*@if (Session["Name"].ToString() == item.f團長名稱)
+                                    {*@
+                                        <small class="text-muted" style="font-family:'微軟正黑體'">
+                                            <button type="button" class="btn btn-link"
+                                                    data-toggle="modal" data-target="#exampleModal"
+                                                    data-title="@item2.會員名稱" data-whatever="@item2.開團留言板編號"
+                                                    data-whatever2="@item2.開團編號" style="font-family:'微軟正黑體'">
+                                                回覆
+                                            </button>
+                                        </small>
+                                    @*}*@
+
+                                    <p>
+                                        @item2.留言內容
+                                    </p>
+
+
+                                    <!-- reply -->
+                                    @foreach (var reply in Model.留言板回覆)
+                                    {
+                                        if (reply.開團留言板編號 == @item2.開團留言板編號)
+                                        {
+                                            <div class="media mt-4">
+                                                <img class="d-flex mr-3 rounded-circle" src="~/Profile_picture/@reply.會員大頭貼" alt="avatar" style="width:50px;height:50px;">
+                                                <div class="media-body">
+                                                    <!--判斷點擊名字跳轉頁面-->
+                                                    @if (Session["Name"].ToString() == reply.會員名稱)
+                                                    {<!--為團長名稱跳到個人頁面-->
+                                                        <strong class="primary-font"><a href="@Url.Action("Profile_Index")">@reply.會員名稱</a></strong>
+                                                    }
+
+                                                    @if (Session["Name"].ToString() != reply.會員名稱)
+                                                    {
+                                                        <strong class="primary-font"><a href="@Url.Action("MemberPage")?f會員名稱=@reply.會員名稱">@reply.會員名稱</a></strong>
+                                                    }
+
+                                                    <small class="pull-right text-muted">
+                                                        <span class="glyphicon glyphicon-time"></span>@reply.發布時間
+                                                    </small>
+
+                                                    <p>
+                                                        @reply.回覆內容
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <!--新增留言-->
+                        <form method="post" action="@Url.Action("Comment")">
+                            <div class="panel-footer" style="margin:30px">
+                                <input type="hidden" name="f開團編號" value="@item.f開團編號" />
+                                <textarea class="form-control input-group-lg" rows="4" style="resize:none" placeholder="提出問題或建議......" name="f留言內容"></textarea>
+                                <div class="clearfix"></div>
+                                <div class="chat_bottom">
+                                    <input type="submit" value="發布留言" class="btn btn_Edit btn-lg" style="float:right;margin-top:20px;margin-bottom:30px" />
+                                </div>
+                            </div>
+                        </form>
+                        <!--新增留言End-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Google地圖</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @{
+
+                        var str = "https://www.google.com.tw/maps/place/";
+                        var place = item.f活動地點 + "/@";
+                        var lat = item.f緯度;
+                        var lng = "," + item.f經度;
+                        var zoom = "," + "16z";
+                        var googlemap = str + place + lat + lng + zoom;
+                    }
+                    <div class="col align-self-center">
+                        <a href="@googlemap" target="_blank" data-toggle="tooltip" data-placement="top" title="點擊規劃路線">
+                            <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="https://maps.googleapis.com/maps/api/staticmap?center=@item.f緯度,@item.f經度&zoom=16&size=500x300&maptype=roadmap&markers=color:red%7Clabel:%7C@(item.f緯度),@item.f經度&key=AIzaSyDLHTWPPSQC2TvnjpMT7t0hwCJ6c0CGLmA" />
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_Cancel" data-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!--Reply Modal-->
+
+@using (Html.BeginForm("Reply", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family:'微軟正黑體';font-weight:bold"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="f開團留言板編號" name="f開團留言板編號">
+                        <input type="hidden" class="form-control" id="f開團編號" name="f開團編號">
+                    </div>
+                    <div class="form-group" style="font-family:'微軟正黑體'">
+                        <textarea class="form-control" id="f回覆內容" name="f回覆內容" placeholder="回覆內容..." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_Cancel" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn_Send">回覆</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var title = button.data('title')
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').html('針對' + '<span style="color:#FAAB1A">'+ title +'</span>'+'的回覆')
+        modal.find('.modal-body input[name="f開團留言板編號"]').val(recipient)
+
+        var teamCode = button.data('whatever2')
+        modal.find('.modal-body input[name="f開團編號"]').val(teamCode)
+    })
+</script>

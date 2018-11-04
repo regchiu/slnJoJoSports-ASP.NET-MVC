@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="prjJoJoSports_dbModelStoreContainer" CdmEntityContainer="prjJoJoSports_dbEntities">
+    <EntitySetMapping Name="t訂閱名單">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t訂閱名單">
+        <MappingFragment StoreEntitySet="t訂閱名單">
+          <ScalarProperty Name="f訂閱名單編號" ColumnName="f訂閱名單編號" />
+          <ScalarProperty Name="f會員名稱" ColumnName="f會員名稱" />
+          <ScalarProperty Name="f訂閱會員大頭貼" ColumnName="f訂閱會員大頭貼" />
+          <ScalarProperty Name="f訂閱會員名稱" ColumnName="f訂閱會員名稱" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t留言板回覆">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t留言板回覆">
+        <MappingFragment StoreEntitySet="t留言板回覆">
+          <ScalarProperty Name="f留言板回覆編號" ColumnName="f留言板回覆編號" />
+          <ScalarProperty Name="f開團留言板編號" ColumnName="f開團留言板編號" />
+          <ScalarProperty Name="f會員大頭貼" ColumnName="f會員大頭貼" />
+          <ScalarProperty Name="f會員名稱" ColumnName="f會員名稱" />
+          <ScalarProperty Name="f回覆內容" ColumnName="f回覆內容" />
+          <ScalarProperty Name="f發布時間" ColumnName="f發布時間" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t參加名單">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t參加名單">
+        <MappingFragment StoreEntitySet="t參加名單">
+          <ScalarProperty Name="f參加名單編號" ColumnName="f參加名單編號" />
+          <ScalarProperty Name="f開團編號" ColumnName="f開團編號" />
+          <ScalarProperty Name="f會員名稱" ColumnName="f會員名稱" />
+          <ScalarProperty Name="f狀態" ColumnName="f狀態" />
+          <ScalarProperty Name="f是否出席" ColumnName="f是否出席" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t開團">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t開團">
+        <MappingFragment StoreEntitySet="t開團">
+          <ScalarProperty Name="f開團編號" ColumnName="f開團編號" />
+          <ScalarProperty Name="f團長名稱" ColumnName="f團長名稱" />
+          <ScalarProperty Name="f運動項目名稱" ColumnName="f運動項目名稱" />
+          <ScalarProperty Name="f標題" ColumnName="f標題" />
+          <ScalarProperty Name="f備註" ColumnName="f備註" />
+          <ScalarProperty Name="f活動開始時間" ColumnName="f活動開始時間" />
+          <ScalarProperty Name="f活動結束時間" ColumnName="f活動結束時間" />
+          <ScalarProperty Name="f貼文發布時間" ColumnName="f貼文發布時間" />
+          <ScalarProperty Name="f報名截止時間" ColumnName="f報名截止時間" />
+          <ScalarProperty Name="f人數上限" ColumnName="f人數上限" />
+          <ScalarProperty Name="f活動地點" ColumnName="f活動地點" />
+          <ScalarProperty Name="f緯度" ColumnName="f緯度" />
+          <ScalarProperty Name="f經度" ColumnName="f經度" />
+          <ScalarProperty Name="f狀態" ColumnName="f狀態" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t開團留言板">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t開團留言板">
+        <MappingFragment StoreEntitySet="t開團留言板">
+          <ScalarProperty Name="f開團留言板編號" ColumnName="f開團留言板編號" />
+          <ScalarProperty Name="f開團編號" ColumnName="f開團編號" />
+          <ScalarProperty Name="f會員大頭貼" ColumnName="f會員大頭貼" />
+          <ScalarProperty Name="f會員名稱" ColumnName="f會員名稱" />
+          <ScalarProperty Name="f留言內容" ColumnName="f留言內容" />
+          <ScalarProperty Name="f發布時間" ColumnName="f發布時間" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t開團評價">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t開團評價">
+        <MappingFragment StoreEntitySet="t開團評價">
+          <ScalarProperty Name="f開團評價編號" ColumnName="f開團評價編號" />
+          <ScalarProperty Name="f開團編號" ColumnName="f開團編號" />
+          <ScalarProperty Name="f會員大頭貼" ColumnName="f會員大頭貼" />
+          <ScalarProperty Name="f會員名稱" ColumnName="f會員名稱" />
+          <ScalarProperty Name="f評論" ColumnName="f評論" />
+          <ScalarProperty Name="f評分" ColumnName="f評分" />
+          <ScalarProperty Name="f活動照片1" ColumnName="f活動照片1" />
+          <ScalarProperty Name="f活動照片2" ColumnName="f活動照片2" />
+          <ScalarProperty Name="f活動照片3" ColumnName="f活動照片3" />
+          <ScalarProperty Name="f活動照片4" ColumnName="f活動照片4" />
+          <ScalarProperty Name="f活動照片5" ColumnName="f活動照片5" />
+          <ScalarProperty Name="f發布時間" ColumnName="f發布時間" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t會員狀態">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t會員狀態">
+        <MappingFragment StoreEntitySet="t會員狀態">
+          <ScalarProperty Name="f會員狀態編號" ColumnName="f會員狀態編號" />
+          <ScalarProperty Name="f帳號" ColumnName="f帳號" />
+          <ScalarProperty Name="f名稱" ColumnName="f名稱" />
+          <ScalarProperty Name="f大頭貼" ColumnName="f大頭貼" />
+          <ScalarProperty Name="f個人簡介" ColumnName="f個人簡介" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t會員資料">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t會員資料">
+        <MappingFragment StoreEntitySet="t會員資料">
+          <ScalarProperty Name="f會員資料編號" ColumnName="f會員資料編號" />
+          <ScalarProperty Name="f帳號" ColumnName="f帳號" />
+          <ScalarProperty Name="f密碼" ColumnName="f密碼" />
+          <ScalarProperty Name="f姓名" ColumnName="f姓名" />
+          <ScalarProperty Name="f名稱" ColumnName="f名稱" />
+          <ScalarProperty Name="f性別" ColumnName="f性別" />
+          <ScalarProperty Name="f電話" ColumnName="f電話" />
+          <ScalarProperty Name="f生日" ColumnName="f生日" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t運動項目">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t運動項目">
+        <MappingFragment StoreEntitySet="t運動項目">
+          <ScalarProperty Name="f運動項目編號" ColumnName="f運動項目編號" />
+          <ScalarProperty Name="f運動名稱" ColumnName="f運動名稱" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t縣市名稱">
+      <EntityTypeMapping TypeName="prjJoJoSports_dbModel.t縣市名稱">
+        <MappingFragment StoreEntitySet="t縣市名稱">
+          <ScalarProperty Name="f縣市名稱編號" ColumnName="f縣市名稱編號" />
+          <ScalarProperty Name="f縣市名稱" ColumnName="f縣市名稱" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

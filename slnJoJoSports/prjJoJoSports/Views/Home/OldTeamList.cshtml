@@ -1,0 +1,171 @@
+﻿@model List<prjJoJoSports.Models.OldTeamListViewModel>
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<style type="text/css">
+
+    /*標題過長使用...*/
+    .oldteamtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn_Detail {
+        padding: 6px 20px;
+        border: 1px solid #FFFFFF;
+        background-color: #2c3d47;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: 0.1s;
+        -moz-transition: 0.1s;
+        -o-transition: 0.1s;
+        cursor: pointer;
+    }
+
+        .btn_Detail:hover {
+            background: none;
+            background-color: #2c3d47;
+            box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+            border: 1px solid #ffffff;
+            color: #FFFFFF;
+        }
+
+        .btn_Detail:active {
+            top: 1px;
+            position: relative;
+        }
+</style>
+
+<div class="container" style="margin-top:80px;margin-bottom:130px">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-center" style="font-family:'微軟正黑體';font-weight:bold">找舊團</h2>
+            <hr />
+        </div>
+    </div>
+    <!--搜尋欄位-->
+    @using (Html.BeginForm("OldTeamList", "Home", FormMethod.Get))
+    {
+        <div class="container" style="margin-top:50px;">
+            <div class="row align-items-center justify-content-center">
+                <div class="input-group col-md-3">
+                    @Html.DropDownList("search縣市", ((IEnumerable<SelectListItem>)ViewBag.CountyName), "縣市名稱", new { @class = "form-control", @style = "font-family:'微軟正黑體'", @onchange = "this.form.submit();", @onkeypress = "if (window.event.keyCode==13) return false;" })
+                </div>
+                <div class="input-group col-md-3">
+                    @Html.DropDownList("search運動", ((IEnumerable<SelectListItem>)ViewBag.SportsName), "運動項目", new { @class = "form-control", @style = "font-family:'微軟正黑體'", @onchange = "this.form.submit();", @onkeypress = "if (window.event.keyCode==13) return false;" })
+                </div>
+                <div class="input-group  col-md-3">
+                    <input type="text" class="form-control" placeholder="關鍵字搜尋" id="Search" style="font-family:'微軟正黑體'" onkeypress="if (window.event.keyCode==13) return false;">
+                    <div class="input-group-append">
+                        <div class="input-group-text text-white" style="background-color:#faab1a"><i class="fas fa-search"></i></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+    <!--搜尋欄位end-->
+    @foreach (var item in Model)
+    {
+        <div class="container Search" style="margin-top:80px">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <img class="img-fluid img-thumbnail mb-3 mb-md-0" src="~/Sports_picture_700x400/@item.運動項目名稱/default.jpg" alt="NewTeam Image">
+                    </div>
+
+                </div>
+                <div class="col-md-3" style="margin-bottom:10px">
+                    <h3 class="oldteamtitle" style="font-family:'微軟正黑體';font-weight:bold;color:#23323a">@item.標題</h3>
+                    @if (Session["Name"].ToString() == item.團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("Profile_Index")">@item.團長名稱</a></p>
+                    }
+                    @if (Session["Name"].ToString() != item.團長名稱)
+                    {
+                        <p style="font-family:'微軟正黑體'"><a href="@Url.Action("MemberPage")?f會員名稱=@item.團長名稱">@item.團長名稱</a></p>
+                    }
+                    <h5 style="font-family:'微軟正黑體'; font-weight:bold; color:#495354">@item.運動項目名稱</h5>
+                    <p style="font-family:'微軟正黑體';margin:auto">活動結束時間</p>
+                    <p style="font-family:'微軟正黑體';font-weight:bold">@DateTime.Parse(item.活動結束時間.ToString()).ToShortDateString() @DateTime.Parse(item.活動結束時間.ToString()).ToShortTimeString()</p>
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <a href="@Url.Action("OldTeamDetail")?f開團編號=@item.開團編號" class="btn btn_Detail align-self-md-center" style="margin-bottom:20px">查看詳細內容</a>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group align-self-end">
+                        @if (item.平均評分 == null)
+                        {
+                            <div class="text-center" id="rateYo_@item.開團編號"></div>
+                            <br />
+                            <div class="display-4 text-center">尚無評分</div>
+                            <script>
+                                $(function () {
+                                    $("#rateYo_@item.開團編號").rateYo({
+                                        rating: 0,
+                                        readOnly: true
+                                    });
+                                });
+                                // Getter
+                                var readOnly = $("#rateYo_@item.開團編號").rateYo("option", "readOnly"); //returns true
+                                // Setter
+                                $("#rateYo_@item.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                            </script>
+                        }
+                        else
+                        {
+                            <div class="text-center" id="rateYo_@item.開團編號"></div>
+                            <br />
+                            <div class="display-2 text-center">@(((double)item.平均評分).ToString("F1"))</div>
+                            <script>
+                                $(function () {
+                                    $("#rateYo_@item.開團編號").rateYo({
+                                        rating: @item.平均評分,
+                                        readOnly: true
+                                    });
+                                });
+                                // Getter
+                                var readOnly = $("#rateYo_@item.開團編號").rateYo("option", "readOnly"); //returns true
+                                // Setter
+                                $("#rateYo_@item.開團編號").rateYo("option", "readOnly", false); //returns a jQuery Element
+                            </script>
+                        }
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    }
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
