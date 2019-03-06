@@ -1583,6 +1583,8 @@
       <DependentUpon>prjJoJoSports_dbModel.edmx</DependentUpon>
       <LastGenOutput>prjJoJoSports_dbModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\ekko-lightbox.js" />
     <Content Include="Scripts\ekko-lightbox.min.js" />
     <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
@@ -1608,8 +1610,6 @@
     <Content Include="Profile_picture\defaultfemale.jpg" />
     <Content Include="Profile_picture\defaultmale.jpg" />
     <Content Include="Review_picture\default.jpg" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -1620,16 +1620,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="fontawesome-free-5.3.1-web\less\brands.less" />
     <Content Include="fontawesome-free-5.3.1-web\less\fontawesome.less" />
     <Content Include="fontawesome-free-5.3.1-web\less\regular.less" />
@@ -1684,6 +1674,26 @@
     <Content Include="fontawesome-free-5.3.1-web\webfonts\fa-solid-900.ttf" />
     <Content Include="fontawesome-free-5.3.1-web\webfonts\fa-solid-900.woff" />
     <Content Include="fontawesome-free-5.3.1-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="package.json" />
+    <Content Include="libman.json" />
+    <Content Include="Content\jquery.rateyo.min.css.map" />
+    <Content Include="Content\jquery.rateyo.less" />
+    <Content Include="Content\fonts\slick.eot" />
+    <Content Include="Content\fonts\slick.ttf" />
+    <Content Include="Content\fonts\slick.woff" />
+    <EntityDeploy Include="Models\prjJoJoSports_dbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>prjJoJoSports_dbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\prjJoJoSports_dbModel.edmx.diagram">
+      <DependentUpon>prjJoJoSports_dbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -1759,23 +1769,13 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="package.json" />
-    <Content Include="libman.json" />
-    <Content Include="Content\jquery.rateyo.min.css.map" />
-    <Content Include="Content\jquery.rateyo.less" />
-    <Content Include="Content\fonts\slick.eot" />
-    <Content Include="Content\fonts\slick.ttf" />
-    <Content Include="Content\fonts\slick.woff" />
-    <EntityDeploy Include="Models\prjJoJoSports_dbModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>prjJoJoSports_dbModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\prjJoJoSports_dbModel.edmx.diagram">
-      <DependentUpon>prjJoJoSports_dbModel.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\prjJoJoSports - Web Deploy.pubxml" />
     <Content Include="Scripts\ekko-lightbox.js.map" />
     <Content Include="Scripts\ekko-lightbox.min.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
